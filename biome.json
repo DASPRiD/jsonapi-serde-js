@@ -1,0 +1,50 @@
+{
+    "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+    "organizeImports": {
+        "enabled": true
+    },
+    "files": {
+        "include": [
+            "biome.json",
+            "commitlint.config.cjs",
+            "release-please-config.json",
+            "packages/**/*"
+        ],
+        "ignore": ["dist/**/*", "coverage/**/*", ".vitepress/cache/**/*"]
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true,
+            "complexity": {
+                "noExcessiveCognitiveComplexity": "warn",
+                "useSimplifiedLogicExpression": "error"
+            },
+            "correctness": {
+                "noNewSymbol": "error",
+                "noUnusedImports": "error",
+                "noUnusedPrivateClassMembers": "error",
+                "useHookAtTopLevel": "error"
+            },
+            "style": {
+                "useBlockStatements": "error",
+                "useCollapsedElseIf": "error",
+                "useForOf": "error",
+                "useFragmentSyntax": "error",
+                "useShorthandArrayType": "error",
+                "useShorthandAssign": "error",
+                "useSingleCaseStatement": "error"
+            },
+            "suspicious": {
+                "noApproximativeNumericConstant": "warn",
+                "noConsoleLog": "error",
+                "noEmptyBlockStatements": "error"
+            }
+        }
+    },
+    "formatter": {
+        "indentStyle": "space",
+        "indentWidth": 4,
+        "lineWidth": 100
+    }
+}

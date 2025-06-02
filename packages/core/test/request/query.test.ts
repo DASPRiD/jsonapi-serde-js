@@ -1,0 +1,149 @@
+import assert from "node:assert/strict";
+import { describe, it } from "node:test";
+import { z } from "zod/v4";
+import { ZodValidationError } from "../../src/common/error.js";
+import { createQueryParser } from "../../src/request/query.js";
+
+describe("request/query", () => {
+    const parseQuery = createQueryParser({
+        include: { allowed: ["author", "comments.author"] },
+        sort: {
+            allowed: ["title", "createdAt"],
+            multiple: false,
+        },
+        fields: {
+            allowed: {
+                article: ["title", "body"],
+                user: ["name"],
+            },
+            default: {
+                article: ["title"],
+            },
+        },
+        filter: z.object({ published: z.enum(["true", "false"]) }).optional(),
+        page: z.object({ number: z.coerce.number().int().min(1) }).optional(),
+    });
+
+    it("should parse valid query string correctly", () => {
+        const result = parseQuery(
+            "include=author&sort=-createdAt&fields[article]=title,body&filter[published]=true&page[number]=2",
+        );
+        assert.deepEqual(result, {
+            include: ["author"],
+            sort: [{ field: "createdAt", order: "desc" }],
+            fields: {
+                article: ["title", "body"],
+            },
+            filter: { published: "true" },
+            page: { number: 2 },
+        });
+    });
+
+    it("should apply defaults when fields and includes are omitted", () => {
+        const result = parseQuery("sort=title&filter[published]=false&page[number]=1");
+        assert.deepEqual(result.fields.article, ["title"]);
+        assert.deepEqual(result.include, []);
+        assert.deepEqual(result.sort, [{ field: "title", order: "asc" }]);
+    });
+
+    it("should throw for invalid include path", () => {
+        assert.throws(
+            () => {
+                parseQuery("include=invalid.path");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "invalid_include_path");
+                return true;
+            },
+        );
+    });
+
+    it("should throw for invalid sort field", () => {
+        assert.throws(
+            () => {
+                parseQuery("sort=invalidField");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "invalid_sort_field");
+                return true;
+            },
+        );
+    });
+
+    it("should throw for too many sort fields when multiple is false", () => {
+        assert.throws(
+            () => {
+                parseQuery("sort=title,createdAt");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "too_many_sort_fields");
+                return true;
+            },
+        );
+    });
+
+    it("should throw for unknown sparse field", () => {
+        assert.throws(
+            () => {
+                parseQuery("fields[article]=unknown");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "unknown_resource_field");
+                return true;
+            },
+        );
+    });
+
+    it("should throw for invalid filter value", () => {
+        assert.throws(
+            () => {
+                parseQuery("filter[published]=maybe");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "invalid_value");
+                return true;
+            },
+        );
+    });
+
+    it("should throw for invalid page value", () => {
+        assert.throws(
+            () => {
+                parseQuery("page[number]=0");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                assert.equal(error.errors.length, 1);
+                assert.equal(error.errors[0].code, "too_small");
+                return true;
+            },
+        );
+    });
+
+    it("should allow disabling parameters", () => {
+        const parseQuery = createQueryParser({});
+        const result = parseQuery("");
+        assert.deepEqual(result, {
+            include: undefined,
+            sort: undefined,
+            fields: undefined,
+            filter: undefined,
+            page: undefined,
+        });
+    });
+
+    it("should treat empty include as undefined", () => {
+        const result = parseQuery("include=");
+        assert.deepEqual(result.include, []);
+    });
+});
