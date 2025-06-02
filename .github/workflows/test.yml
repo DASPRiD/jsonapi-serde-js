@@ -1,0 +1,60 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - 1.x
+  pull_request:
+    branches:
+      - main
+      - 1.x
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use pnpm
+        uses: pnpm/action-setup@v2
+
+      - name: Use Node.js 22.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Biome
+        run: pnpm biome ci .
+
+      - name: Type Check
+        run: pnpm typecheck
+
+      - name: Test
+        run: pnpm ci:test
+
+      - name: Upload server coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: server
+          directory: packages/server
+
+      - name: Upload koa integration coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: koa
+          directory: packages/integration/koa
+
+      - name: Upload client reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: client
+          directory: packages/client
