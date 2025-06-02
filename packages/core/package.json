@@ -1,0 +1,46 @@
+{
+    "name": "@jsonapi-serde/core",
+    "version": "0.0.0",
+    "description": "Framework agnostic JSON:API serialization and deserialization",
+    "type": "module",
+    "author": "Ben Scholzen 'DASPRiD'",
+    "license": "BSD-3-Clause",
+    "keywords": ["jsonapi", "typescript", "zod", "serializer", "deserializer", "parser"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dasprid/jsonapi-serde-js.git"
+    },
+    "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "test": "tsx --test"
+    },
+    "files": ["dist/**/*"],
+    "exports": {
+        "./common": {
+            "types": "./src/common/index.ts",
+            "jsonapi-serde": "./src/common/index.ts",
+            "default": "./dist/common/index.js"
+        },
+        "./request": {
+            "types": "./src/request/index.ts",
+            "jsonapi-serde": "./src/request/index.ts",
+            "default": "./dist/request/index.js"
+        },
+        "./response": {
+            "types": "./src/response/index.ts",
+            "jsonapi-serde": "./src/response/index.ts",
+            "default": "./dist/response/index.js"
+        }
+    },
+    "dependencies": {
+        "fast-content-type-parse": "^3.0.0",
+        "qs": "^6.14.0"
+    },
+    "devDependencies": {
+        "@types/qs": "^6.14.0",
+        "zod": "^3.25.42"
+    },
+    "peerDependencies": {
+        "zod": "^3.25.42"
+    }
+}

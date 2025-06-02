@@ -1,0 +1,9 @@
+{
+    "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+    "packages": {
+        "packages/core": {},
+        "packages/koa": {}
+    },
+    "release-type": "node",
+    "plugins": ["node-workspace"]
+}
