@@ -1,0 +1,34 @@
+{
+    "private": true,
+    "name": "@jsonapi-serde/root",
+    "version": "0.0.0",
+    "description": "Framework agnostic JSON:API serialization and deserialization",
+    "type": "module",
+    "author": "Ben Scholzen 'DASPRiD'",
+    "license": "BSD-3-Clause",
+    "keywords": ["jsonapi", "typescript", "zod", "serializer", "deserializer", "parser"],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dasprid/jsonapi-serde-js.git"
+    },
+    "scripts": {
+        "build": "pnpm -r build",
+        "test": "pnpm --parallel test",
+        "ci:test": "pnpm -r ci:test",
+        "ci:typecheck": "pnpm -r tsc --noEmit",
+        "format": "biome format . --write",
+        "check": "biome check . --write"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "1.9.4",
+        "@commitlint/cli": "^19.8.1",
+        "@commitlint/config-conventional": "^19.8.1",
+        "@tsconfig/node22": "^22.0.2",
+        "@types/node": "^22.15.29",
+        "c8": "^10.1.3",
+        "lefthook": "^1.11.13",
+        "tsx": "^4.19.4",
+        "typescript": "^5.8.3"
+    },
+    "packageManager": "pnpm@10.11.0+sha512.6540583f41cc5f628eb3d9773ecee802f4f9ef9923cc45b69890fb47991d4b092964694ec3a4f738a420c918a333062c8b925d312f42e4f0c263eb603551f977"
+}
