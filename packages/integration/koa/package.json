@@ -1,11 +1,19 @@
 {
     "name": "@jsonapi-serde/integration-koa",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Koa integration for @jsonapi-serde/server",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",
     "license": "BSD-3-Clause",
-    "keywords": ["jsonapi", "typescript", "zod", "serializer", "deserializer", "parser", "koa"],
+    "keywords": [
+        "jsonapi",
+        "typescript",
+        "zod",
+        "serializer",
+        "deserializer",
+        "parser",
+        "koa"
+    ],
     "repository": {
         "type": "git",
         "url": "https://github.com/dasprid/jsonapi-serde-js.git"
@@ -16,7 +24,9 @@
         "typecheck": "tsc --noEmit",
         "ci:test": "c8 --reporter=lcov pnpm test"
     },
-    "files": ["dist/**/*"],
+    "files": [
+        "dist/**/*"
+    ],
     "exports": {
         ".": {
             "types": "./src/index.ts",
