@@ -1,4 +1,5 @@
 import { z } from "zod/v4";
+import type { $ZodType } from "zod/v4/core";
 import { ZodValidationError, ZodValidationErrorParams } from "../common/error.js";
 import type { ParentPaths } from "../common/utils.js";
 import { type SearchParamsInput, parseSearchParams } from "../http/index.js";
@@ -82,8 +83,8 @@ export type ParseQueryOptions<
     TInclude extends string | undefined,
     TSortFields extends string | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
-    TFilterSchema extends z.ZodTypeAny | undefined,
-    TPageSchema extends z.ZodTypeAny | undefined,
+    TFilterSchema extends $ZodType | undefined,
+    TPageSchema extends $ZodType | undefined,
 > = {
     /** Configuration for `include` query param */
     include?: TInclude extends string ? ParseQueryIncludeOptions<TInclude> : undefined;
@@ -110,16 +111,16 @@ export type ParseQueryResult<
     TInclude extends string | undefined,
     TSortFields extends string | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
-    TFilterSchema extends z.ZodTypeAny | undefined,
-    TPageSchema extends z.ZodTypeAny | undefined,
+    TFilterSchema extends $ZodType | undefined,
+    TPageSchema extends $ZodType | undefined,
 > = {
     include: TInclude extends string ? ParentPaths<TInclude>[] : undefined;
     sort: TSortFields extends string ? Sort<TSortFields> : undefined;
     fields: TSparseFieldSets extends SparseFieldSets
         ? PartialSparseFieldSets<TSparseFieldSets>
         : undefined;
-    filter: TFilterSchema extends z.ZodTypeAny ? z.output<TFilterSchema> : undefined;
-    page: TPageSchema extends z.ZodTypeAny ? z.output<TPageSchema> : undefined;
+    filter: TFilterSchema extends $ZodType ? z.output<TFilterSchema> : undefined;
+    page: TPageSchema extends $ZodType ? z.output<TPageSchema> : undefined;
 };
 
 /**
@@ -155,16 +156,19 @@ const buildIncludeSchema = (options: ParseQueryIncludeOptions<string>) =>
 const buildSortSchema = <TSortFields extends string>(options: ParseQuerySortOptions<TSortFields>) =>
     z
         .string()
-        .transform(
-            (fields): Sort<string> =>
-                fields.split(",").map((field) => {
-                    if (field.startsWith("-")) {
-                        return { field: field.substring(1), order: "desc" };
-                    }
+        .transform((fields): Sort<string> => {
+            if (fields === "") {
+                return [];
+            }
 
-                    return { field, order: "asc" };
-                }),
-        )
+            return fields.split(",").map((field) => {
+                if (field.startsWith("-")) {
+                    return { field: field.substring(1), order: "desc" };
+                }
+
+                return { field, order: "asc" };
+            });
+        })
         .check((context) => {
             if (context.value.length > 1 && !options.multiple) {
                 context.issues.push({
@@ -210,7 +214,7 @@ const buildSparseFieldsetSchema = <TSparseFieldSets extends SparseFieldSets>(
                     type,
                     z
                         .string()
-                        .transform((fields) => fields.split(","))
+                        .transform((fields) => (fields === "" ? [] : fields.split(",")))
                         .check((context) => {
                             for (const field of context.value) {
                                 if (!allowedFields.includes(field)) {
@@ -250,8 +254,8 @@ export type QueryParser<
     TInclude extends string | undefined,
     TSortFields extends string | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
-    TFilterSchema extends z.ZodTypeAny | undefined,
-    TPageSchema extends z.ZodTypeAny | undefined,
+    TFilterSchema extends $ZodType | undefined,
+    TPageSchema extends $ZodType | undefined,
 > = (
     searchParams: SearchParamsInput,
 ) => ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>;
@@ -280,9 +284,9 @@ export type QueryParser<
 export const createQueryParser = <
     TInclude extends string | undefined,
     TSortFields extends string | undefined,
-    TSparseFieldSets extends Record<string, string[]>,
-    TFilterSchema extends z.ZodTypeAny | undefined,
-    TPageSchema extends z.ZodTypeAny | undefined,
+    TSparseFieldSets extends SparseFieldSets | undefined,
+    TFilterSchema extends $ZodType | undefined,
+    TPageSchema extends $ZodType | undefined,
 >(
     options: ParseQueryOptions<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>,
 ): QueryParser<

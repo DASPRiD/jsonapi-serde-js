@@ -124,7 +124,9 @@ describe("request/body", () => {
                 attributesSchema: z.strictObject({ title: z.string() }),
                 relationshipsSchema: z.strictObject({
                     user: relationshipSchema(clientResourceIdentifierSchema("user")),
-                    comments: relationshipSchema(clientResourceIdentifierSchema("comment").array()),
+                    comments: relationshipSchema(
+                        z.array(clientResourceIdentifierSchema("comment")),
+                    ),
                 }),
                 includedTypeSchemas: {
                     user: {

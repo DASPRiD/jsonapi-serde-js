@@ -65,6 +65,35 @@ export default defineConfig({
                             },
                         ],
                     },
+                    {
+                        text: "OpenAPI",
+                        items: [
+                            {
+                                text: "Introduction",
+                                link: "/server/openapi/introduction",
+                            },
+                            {
+                                text: "Getting Started",
+                                link: "/server/openapi/getting-started",
+                            },
+                            {
+                                text: "Query Parameters",
+                                link: "/server/openapi/query-parameters",
+                            },
+                            {
+                                text: "Data Requests",
+                                link: "/server/openapi/data-requests",
+                            },
+                            {
+                                text: "Data Responses",
+                                link: "/server/openapi/data-responses",
+                            },
+                            {
+                                text: "Error Responses",
+                                link: "/server/openapi/error-responses",
+                            },
+                        ],
+                    },
                 ],
             },
             {

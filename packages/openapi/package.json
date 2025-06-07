@@ -1,0 +1,46 @@
+{
+    "name": "@jsonapi-serde/openapi",
+    "version": "0.0.0",
+    "description": "OpenAPI schema generation for JSON:API serde",
+    "type": "module",
+    "author": "Ben Scholzen 'DASPRiD'",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "jsonapi",
+        "typescript",
+        "zod",
+        "openapi"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/dasprid/jsonapi-serde-js.git"
+    },
+    "scripts": {
+        "build": "tsc -p tsconfig.build.json",
+        "test": "tsx --test --test-reporter=spec",
+        "typecheck": "tsc --noEmit",
+        "ci:test": "c8 --reporter=lcov pnpm test"
+    },
+    "files": [
+        "dist/**/*"
+    ],
+    "exports": {
+        "./index": {
+            "types": [
+                "./dist/index/index.d.ts",
+                "./src/index/index.ts"
+            ],
+            "default": "./dist/index/index.js"
+        }
+    },
+    "devDependencies": {
+        "@jsonapi-serde/server": "workspace:*",
+        "openapi3-ts": "^4.4.0",
+        "zod": "^3.25.42"
+    },
+    "peerDependencies": {
+        "@jsonapi-serde/server": "workspace:*",
+        "openapi3-ts": "^4.4.0",
+        "zod": "^3.25.42"
+    }
+}

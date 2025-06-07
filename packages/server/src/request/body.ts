@@ -1,7 +1,8 @@
 import { z } from "zod/v4";
+import type { $ZodType } from "zod/v4/core";
 import { JsonApiError, ZodValidationError, ZodValidationErrorParams } from "../common/index.js";
 import { ContentTypeParser, type ParsedContentType } from "../http/index.js";
-import { MediaTypeParserError } from "../http/media-type-parser.js";
+import { MediaTypeParserError } from "../http/index.js";
 
 /**
  * Represents the structure of the request body and its content type
@@ -31,12 +32,12 @@ const fixedTypeSchema = <TType extends string>(type: TType) =>
                 input: context.value,
             });
         }
-    }) as unknown as z.ZodType<TType>;
+    }) as unknown as $ZodType<TType>;
 
 /**
  * Zod schema for a resource identifier with a required `type` and `id`
  */
-export type ResourceIdentifierSchema<TType extends string> = z.ZodType<{
+export type ResourceIdentifierSchema<TType extends string> = $ZodType<{
     type: TType;
     id: string;
 }>;
@@ -46,7 +47,7 @@ export type ResourceIdentifierSchema<TType extends string> = z.ZodType<{
  */
 export const resourceIdentifierSchema = <TType extends string>(
     type: TType,
-    idSchema: z.ZodType<string> = z.string(),
+    idSchema: $ZodType<string> = z.string(),
 ): ResourceIdentifierSchema<TType> =>
     z.strictObject({
         type: fixedTypeSchema(type),
@@ -56,7 +57,7 @@ export const resourceIdentifierSchema = <TType extends string>(
 /**
  * Zod schema for a client-generated resource identifier with a local ID (`lid`)
  */
-export type ClientResourceIdentifierSchema<TType extends string> = z.ZodType<{
+export type ClientResourceIdentifierSchema<TType extends string> = $ZodType<{
     type: TType;
     lid: string;
 }>;
@@ -79,14 +80,14 @@ type AnyResourceIdentifier =
 /**
  * Union type representing one or more resource identifiers or `null`
  */
-export type RelationshipDataSchema = z.ZodType<
+export type RelationshipDataSchema = $ZodType<
     AnyResourceIdentifier | AnyResourceIdentifier[] | null
 >;
 
 /**
  * Schema for a JSON:API relationship object with a `data` field
  */
-export type RelationshipSchema<TDataSchema extends RelationshipDataSchema> = z.ZodType<{
+export type RelationshipSchema<TDataSchema extends RelationshipDataSchema> = $ZodType<{
     data: z.output<TDataSchema>;
 }>;
 
@@ -103,14 +104,14 @@ export const relationshipSchema = <TDataSchema extends RelationshipDataSchema>(
 /**
  * Zod schema for a map of named relationships
  */
-export type RelationshipsSchema = z.ZodType<
+export type RelationshipsSchema = $ZodType<
     Record<string, z.output<RelationshipSchema<RelationshipDataSchema>>>
 >;
 
 /**
  * Zod schema for a generic JSON:API attributes object
  */
-export type AttributesSchema = z.ZodType<Record<string, unknown>>;
+export type AttributesSchema = $ZodType<Record<string, unknown>>;
 
 /**
  * Configuration object for parsing a resource request
@@ -118,8 +119,8 @@ export type AttributesSchema = z.ZodType<Record<string, unknown>>;
  * Includes optional `idSchema`, `attributesSchema`, and `relationshipsSchema`, and an optional map of
  * `includedTypeSchemas` keyed by type name.
  */
-type ParseResourceRequestOptions<
-    TIdSchema extends z.ZodType<string> | undefined,
+export type ParseResourceRequestOptions<
+    TIdSchema extends $ZodType<string> | undefined,
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
@@ -217,13 +218,13 @@ export type IncludedTypesContainer<T extends IncludedTypeSchemas> = {
  * Parsed result from a resource request
  */
 export type ParseResourceRequestResult<
-    TIdSchema extends z.ZodType<string> | undefined,
+    TIdSchema extends $ZodType<string> | undefined,
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
     TIncludedTypeSchemas extends IncludedTypeSchemas | undefined,
 > = {
-    id: TIdSchema extends z.ZodType<string> ? z.output<TIdSchema> : undefined;
+    id: TIdSchema extends $ZodType<string> ? z.output<TIdSchema> : undefined;
     type: TType;
     attributes: TAttributesSchema extends AttributesSchema
         ? z.output<TAttributesSchema>
@@ -264,12 +265,12 @@ export type IncludedTypeSchemas = {
 };
 
 type IncludedResourceSchema = z.ZodObject<{
-    lid: z.ZodType<string>;
-    type: z.ZodType<string>;
+    lid: $ZodType<string>;
+    type: $ZodType<string>;
     attributes: AttributesSchema | z.ZodUndefined;
     relationships: RelationshipsSchema | z.ZodUndefined;
 }>;
-type IncludedSchema = z.ZodType<z.output<IncludedResourceSchema>[] | undefined>;
+type IncludedSchema = $ZodType<z.output<IncludedResourceSchema>[] | undefined>;
 
 const buildIncludedSchema = <TIncludedTypeSchemas extends IncludedTypeSchemas | undefined>(
     includedTypes: TIncludedTypeSchemas,
@@ -320,7 +321,7 @@ const buildIncludedSchema = <TIncludedTypeSchemas extends IncludedTypeSchemas | 
  * @throws {JsonApiError} for invalid content type or malformed document
  */
 export const parseResourceRequest = <
-    TIdSchema extends z.ZodType<string> | undefined,
+    TIdSchema extends $ZodType<string> | undefined,
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
@@ -414,18 +415,18 @@ export const parseResourceRequest = <
  *
  * @throws {JsonApiError} for invalid content type or schema errors
  */
-export const parseRelationshipRequest = <TIdSchema extends z.ZodType<string | null> | undefined>(
+export const parseRelationshipRequest = <TIdSchema extends $ZodType<string | null> | undefined>(
     context: BodyContext,
     type: string,
     idSchema?: TIdSchema,
-): TIdSchema extends z.ZodType<string | null> ? z.output<NoInfer<TIdSchema>> : string => {
+): TIdSchema extends $ZodType<string | null> ? z.output<NoInfer<TIdSchema>> : string => {
     const body = parseBody(context);
 
     const parseResult = z
         .object({
             data: z.object({
                 type: z.literal(type),
-                id: (idSchema ?? z.string()) as z.ZodType<string | null>,
+                id: (idSchema ?? z.string()) as $ZodType<string | null>,
             }),
         })
         .safeParse(body);
@@ -434,7 +435,7 @@ export const parseRelationshipRequest = <TIdSchema extends z.ZodType<string | nu
         throw new ZodValidationError(parseResult.error.issues, "body");
     }
 
-    return parseResult.data.data.id as TIdSchema extends z.ZodType<string | null>
+    return parseResult.data.data.id as TIdSchema extends $ZodType<string | null>
         ? z.output<NoInfer<TIdSchema>>
         : string;
 };
@@ -447,7 +448,7 @@ export const parseRelationshipRequest = <TIdSchema extends z.ZodType<string | nu
 export const parseRelationshipsRequest = (
     context: BodyContext,
     type: string,
-    idSchema: z.ZodType<string> = z.string(),
+    idSchema: $ZodType<string> = z.string(),
 ): string[] => {
     const body = parseBody(context);
 
