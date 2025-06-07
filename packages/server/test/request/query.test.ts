@@ -39,6 +39,16 @@ describe("request/query", () => {
         });
     });
 
+    it("should interpret empty sort parameter as empty array", () => {
+        const result = parseQuery("sort=");
+        assert.partialDeepStrictEqual(result, { sort: [] });
+    });
+
+    it("should interpret empty field parameter as empty array", () => {
+        const result = parseQuery("fields[user]=");
+        assert.partialDeepStrictEqual(result, { fields: { user: [] } });
+    });
+
     it("should apply defaults when fields and includes are omitted", () => {
         const result = parseQuery("sort=title&filter[published]=false&page[number]=1");
         assert.deepEqual(result.fields.article, ["title"]);

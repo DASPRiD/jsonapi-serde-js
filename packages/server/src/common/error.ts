@@ -133,6 +133,10 @@ export class ZodValidationError extends JsonApiError {
             return { pointer: `/${path.join("/")}` };
         }
 
+        if (path.length === 0) {
+            return undefined;
+        }
+
         return {
             parameter: `${path[0].toString()}${path
                 .slice(1)

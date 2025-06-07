@@ -96,6 +96,12 @@ describe("common/error", () => {
             assert.equal(error.errors[0].source?.pointer, "/name");
         });
 
+        it("should ignore empty query validation path", () => {
+            const error = new ZodValidationError([{ ...mockIssue, path: [] }], "query");
+            assert.equal(error.status, 400);
+            assert.equal(error.errors[0].source, undefined);
+        });
+
         it("should override defaults from ZodValidationErrorParams", () => {
             const issue: $ZodIssue = {
                 code: "custom",
