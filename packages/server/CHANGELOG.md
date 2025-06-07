@@ -1,0 +1,9 @@
+# Changelog
+
+## 1.0.0 (2025-06-07)
+
+
+### Features
+
+* add openapi package ([dde1fcd](https://github.com/DASPRiD/jsonapi-serde-js/commit/dde1fcd0ad2a64770f895d79c7bda1e0b673b529))
+* initial commit ([842f8e7](https://github.com/DASPRiD/jsonapi-serde-js/commit/842f8e73268d2ca61e4d63acf1401927e471435f))
