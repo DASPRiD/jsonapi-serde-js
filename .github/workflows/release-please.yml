@@ -14,6 +14,9 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
 
+    outputs:
+      any_release_created: ${{ steps.check_release.outputs.any_release_created }}
+
     steps:
       - uses: actions/create-github-app-token@v2
         id: app-token
@@ -22,32 +25,45 @@ jobs:
           private-key: ${{ secrets.PRIVATE_KEY }}
 
       - uses: googleapis/release-please-action@v4
+        id: release
         with:
           token: ${{ steps.app-token.outputs.token }}
           target-branch: ${{ github.ref_name }}
 
+      - name: Check if any package released
+        id: check_release
+        uses: actions/github-script@v7
+        env:
+          RELEASE_OUTPUTS: ${{ toJSON(steps.release.outputs) }}
+        with:
+          script: |
+            const releaseOutputs = JSON.parse(process.env.RELEASE_OUTPUTS);
+            const releaseCreatedKeys = Object.keys(releaseOutputs).filter(k => k.endsWith('--release_created'));
+            const anyRelease = releaseCreatedKeys.some((key) => releaseOutputs[key] === 'true');
+            core.setOutput('any_release_created', anyRelease ? 'true' : 'false');
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: needs.release.outputs.any_release_created == 'true'
+
+    steps:
       - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created == 'true' }}
 
       - name: Use pnpm
         uses: pnpm/action-setup@v2
-        if: ${{ steps.release.outputs.release_created == 'true' }}
 
       - name: Use Node.js 22.x
         uses: actions/setup-node@v3
-        if: ${{ steps.release.outputs.release_created == 'true' }}
         with:
           node-version: 22
           cache: 'pnpm'
 
       - name: Install Dependencies
-        if: ${{ steps.release.outputs.release_created == 'true' }}
         run: pnpm --filter=!@jsonapi-serde/docs install
 
       - name: Build
-        if: ${{ steps.release.outputs.release_created == 'true' }}
         run: pnpm --filter=!@jsonapi-serde/docs -r build
 
       - name: Publish
-        if: ${{ steps.release.outputs.release_created == 'true' }}
-        run: pnpm --filter=!@jsonapi-serde/docs --filter=!@jsonapi-serde/core -r publish --access public
+        run: pnpm --filter=!@jsonapi-serde/docs -r publish --access public
