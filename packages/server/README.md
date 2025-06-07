@@ -1,7 +1,7 @@
 # JSON:API Serde - Server
 
 [![Test](https://github.com/DASPRiD/jsonapi-serde-js/actions/workflows/test.yml/badge.svg)](https://github.com/DASPRiD/jsonapi-serde-js/actions/workflows/test.yml)
-[![codecov](https://codecov.io/gh/DASPRiD/jsonapi-serde-js/graph/badge.svg?token=UfRUzGqiN3)](https://codecov.io/gh/DASPRiD/jsonapi-serde-js)
+[![codecov](https://codecov.io/gh/DASPRiD/jsonapi-serde-js/graph/badge.svg?token=UfRUzGqiN3&component=server)](https://codecov.io/gh/DASPRiD/jsonapi-serde-js)
 
 ---
 

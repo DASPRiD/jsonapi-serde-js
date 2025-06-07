@@ -1,0 +1,21 @@
+comment:
+  layout: "header, diff, flags, components"
+
+component_management:
+  individual_components:
+    - component_id: server
+      name: Server
+      paths:
+        - packages/server/**
+    - component_id: openapi
+      name: OpenAPI
+      paths:
+        - packages/openapi/**
+    - component_id: integration_koa
+      name: "Integration: Koa"
+      paths:
+        - packages/integration/koa/**
+    - component_id: client
+      name: Client
+      paths:
+        - packages/client/**
