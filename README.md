@@ -15,8 +15,10 @@ To check out docs, visit [jsonapi-serde.js.org](https://jsonapi-serde.js.org).
 
 Detailed changes for each release are documented in the respective CHANGELOGs:
 
-- [@jsonapi-serde/core](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/server/CHANGELOG.md)
-- [@jsonapi-serde/koa](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/integration/koa/CHANGELOG.md)
+- [@jsonapi-serde/server](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/server/CHANGELOG.md)
+- [@jsonapi-serde/openapi](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/openapi/CHANGELOG.md)
+- [@jsonapi-serde/integration-koa](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/integration/koa/CHANGELOG.md)
+- [@jsonapi-serde/client](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/client/CHANGELOG.md)
 
 ## License
 
