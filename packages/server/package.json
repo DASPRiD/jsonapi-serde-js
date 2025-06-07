@@ -1,6 +1,6 @@
 {
     "name": "@jsonapi-serde/server",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Framework agnostic JSON:API serialization and deserialization",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",
@@ -28,22 +28,34 @@
     ],
     "exports": {
         "./common": {
-            "types": ["./dist/common/index.d.ts", "./src/common/index.ts"],
+            "types": [
+                "./dist/common/index.d.ts",
+                "./src/common/index.ts"
+            ],
             "jsonapi-serde": "./src/common/index.ts",
             "default": "./dist/common/index.js"
         },
         "./http": {
-            "types": ["./dist/http/index.d.ts", "./src/http/index.ts"],
+            "types": [
+                "./dist/http/index.d.ts",
+                "./src/http/index.ts"
+            ],
             "jsonapi-serde": "./src/http/index.ts",
             "default": "./dist/http/index.js"
         },
         "./request": {
-            "types": ["./dist/request/index.d.ts", "./src/request/index.ts"],
+            "types": [
+                "./dist/request/index.d.ts",
+                "./src/request/index.ts"
+            ],
             "jsonapi-serde": "./src/request/index.ts",
             "default": "./dist/request/index.js"
         },
         "./response": {
-            "types": ["./dist/response/index.d.ts", "./src/response/index.ts"],
+            "types": [
+                "./dist/response/index.d.ts",
+                "./src/response/index.ts"
+            ],
             "jsonapi-serde": "./src/response/index.ts",
             "default": "./dist/response/index.js"
         }
