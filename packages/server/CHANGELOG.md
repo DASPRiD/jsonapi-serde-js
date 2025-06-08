@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.0...server-v1.0.1) (2025-06-08)
+
+
+### Bug Fixes
+
+* **server:** improve type strictness on query parser options ([661d658](https://github.com/DASPRiD/jsonapi-serde-js/commit/661d658ac5999ae8ce5a8aeda92f3c76c838fb07))
+
 ## 1.0.0 (2025-06-07)
 
 
