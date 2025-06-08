@@ -4,43 +4,6 @@ import { ZodValidationError, ZodValidationErrorParams } from "../common/error.js
 import type { ParentPaths } from "../common/utils.js";
 import { type SearchParamsInput, parseSearchParams } from "../http/index.js";
 
-/*
-type Opt<T extends readonly string[] | undefined> = {
-    foo: T;
-    bar?: T extends readonly string[] ? T[number][] : undefined;
-};
-
-type Opts<T extends readonly string[] | undefined> = {
-    opt?: Opt<T>;
-};
-
-type X<T> = undefined extends T ? "omitted" : "present";
-
-const foo = <const T extends readonly string[] | undefined>(t: Opts<T>): X<T> => {
-    throw "@todo";
-};
-
-// Present
-const bar = foo({
-    opt: {
-        foo: ["foo"],
-        bar: ["bar"]
-    }
-});
-
-// Omitted
-const baz = foo({
-    opt: undefined,
-});
-
-// Omitted
-const bat = foo({
-    opt: {
-        foo: undefined,
-    },
-});
-*/
-
 /**
  * Options for the `include` query parameter
  *
