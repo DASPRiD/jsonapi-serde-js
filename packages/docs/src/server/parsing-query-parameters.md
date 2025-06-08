@@ -50,6 +50,23 @@ console.log(query.filter);  // { published: "true" }
 console.log(query.page);    // { number: "1", size: "10" }
 ```
 
+::: tip NOTE
+
+Returned results and allowed default values are inferred from the list of allowed values if possible. This works great
+when you define the arrays right in the `createQueryParser` call, but fails if you define them in a variable outside.
+
+In that case you need to mark the variable `as const` in order to get proper type inference:
+
+```ts
+const allowedInclude = ["author", "comments.author"] as const;
+
+const parseArticleQuery = createQueryParser({
+    include: { allowed: allowedInclude }
+});
+```
+
+:::
+
 ## Type-safe Result
 
 The return value is fully typed:
