@@ -8,8 +8,8 @@ import { toJSONSchema } from "zod/v4/core";
  */
 export const buildQueryParameters = (
     options: ParseQueryOptions<
-        string | undefined,
-        string | undefined,
+        readonly string[] | undefined,
+        readonly string[] | undefined,
         SparseFieldSets | undefined,
         $ZodType | undefined,
         $ZodType | undefined
@@ -17,7 +17,7 @@ export const buildQueryParameters = (
 ): ParameterObject[] => {
     const parameters: ParameterObject[] = [];
 
-    if (options.include) {
+    if (options.include?.allowed) {
         parameters.push({
             name: "include",
             in: "query",
@@ -32,7 +32,7 @@ export const buildQueryParameters = (
         });
     }
 
-    if (options.sort) {
+    if (options.sort?.allowed) {
         parameters.push({
             name: "include",
             in: "query",
@@ -53,7 +53,7 @@ export const buildQueryParameters = (
         });
     }
 
-    if (options.fields) {
+    if (options.fields?.allowed) {
         parameters.push({
             name: "fields",
             in: "query",

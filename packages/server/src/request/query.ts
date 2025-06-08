@@ -4,21 +4,58 @@ import { ZodValidationError, ZodValidationErrorParams } from "../common/error.js
 import type { ParentPaths } from "../common/utils.js";
 import { type SearchParamsInput, parseSearchParams } from "../http/index.js";
 
+/*
+type Opt<T extends readonly string[] | undefined> = {
+    foo: T;
+    bar?: T extends readonly string[] ? T[number][] : undefined;
+};
+
+type Opts<T extends readonly string[] | undefined> = {
+    opt?: Opt<T>;
+};
+
+type X<T> = undefined extends T ? "omitted" : "present";
+
+const foo = <const T extends readonly string[] | undefined>(t: Opts<T>): X<T> => {
+    throw "@todo";
+};
+
+// Present
+const bar = foo({
+    opt: {
+        foo: ["foo"],
+        bar: ["bar"]
+    }
+});
+
+// Omitted
+const baz = foo({
+    opt: undefined,
+});
+
+// Omitted
+const bat = foo({
+    opt: {
+        foo: undefined,
+    },
+});
+*/
+
 /**
  * Options for the `include` query parameter
  *
  * Defines which related resources are allowed in an `include` request.
  */
-export type ParseQueryIncludeOptions<TInclude extends string> = {
+export type ParseQueryIncludeOptions<TInclude extends readonly string[] | undefined> = {
     /**
      * Allowed include-paths (e.g., "author", "comments.author")
      *
      * Allowing "comments" automatically allows "comments.author".
      */
-    allowed: TInclude[];
+    allowed: TInclude;
 
     /** Default include-paths if none are provided in the query */
-    default?: string[];
+    default?: TInclude extends readonly string[] ? ParentPaths<TInclude[number]>[] : undefined;
 };
 
 /**
@@ -45,20 +82,20 @@ export type Sort<TSort extends string> = SortField<TSort>[];
 /**
  * Options for the `sort` query parameter
  */
-export type ParseQuerySortOptions<TFields extends string> = {
+export type ParseQuerySortOptions<TFields extends readonly string[] | undefined> = {
     /** List of field names that are allowed to be sorted */
-    allowed: TFields[];
+    allowed: TFields;
 
     /** Default sorting order, if none is provided in the query */
-    default?: SortField<TFields>[];
+    default?: TFields extends readonly string[] ? Sort<TFields[number]> : undefined;
 
     /** Whether multiple sort fields are allowed (comma-separated) */
     multiple?: boolean;
 };
 
-export type SparseFieldSets = Record<string, string[]>;
+export type SparseFieldSets = Record<string, readonly string[]>;
 export type PartialSparseFieldSets<TFieldSets extends SparseFieldSets> = {
-    [K in keyof TFieldSets]?: Partial<TFieldSets[K]>;
+    [K in keyof TFieldSets]?: TFieldSets[K][number][];
 };
 
 /**
@@ -66,12 +103,12 @@ export type PartialSparseFieldSets<TFieldSets extends SparseFieldSets> = {
  *
  * Allows specifying which fields are allowed per resource type.
  */
-export type ParseQuerySparseFieldsetOptions<TAllowed extends Record<string, string[]>> = {
+export type ParseQuerySparseFieldsetOptions<TAllowed extends SparseFieldSets | undefined> = {
     /** Allowed field names per resource type (e.g., { articles: ["title", "body"] }) */
     allowed: TAllowed;
 
     /** Default fieldsets to apply when the query omits some or all `fields` */
-    default?: PartialSparseFieldSets<TAllowed>;
+    default?: TAllowed extends SparseFieldSets ? PartialSparseFieldSets<TAllowed> : undefined;
 };
 
 /**
@@ -80,22 +117,20 @@ export type ParseQuerySparseFieldsetOptions<TAllowed extends Record<string, stri
  * Omitting a property will disallow it in the query parameters.
  */
 export type ParseQueryOptions<
-    TInclude extends string | undefined,
-    TSortFields extends string | undefined,
+    TInclude extends readonly string[] | undefined,
+    TSortFields extends readonly string[] | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
 > = {
     /** Configuration for `include` query param */
-    include?: TInclude extends string ? ParseQueryIncludeOptions<TInclude> : undefined;
+    include?: ParseQueryIncludeOptions<TInclude>;
 
     /** Configuration for `sort` query param */
-    sort?: TSortFields extends string ? ParseQuerySortOptions<TSortFields> : undefined;
+    sort?: ParseQuerySortOptions<TSortFields>;
 
     /** Configuration for `fields` query param */
-    fields?: TSparseFieldSets extends SparseFieldSets
-        ? ParseQuerySparseFieldsetOptions<TSparseFieldSets>
-        : undefined;
+    fields?: ParseQuerySparseFieldsetOptions<TSparseFieldSets>;
 
     /** Zod schema for validating and parsing the `filter` query param */
     filter?: TFilterSchema;
@@ -108,17 +143,27 @@ export type ParseQueryOptions<
  * Structured result returned by the query parser
  */
 export type ParseQueryResult<
-    TInclude extends string | undefined,
-    TSortFields extends string | undefined,
+    TInclude extends readonly string[] | undefined,
+    TSortFields extends readonly string[] | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
 > = {
-    include: TInclude extends string ? ParentPaths<TInclude>[] : undefined;
-    sort: TSortFields extends string ? Sort<TSortFields> : undefined;
-    fields: TSparseFieldSets extends SparseFieldSets
-        ? PartialSparseFieldSets<TSparseFieldSets>
-        : undefined;
+    include: undefined extends TInclude
+        ? undefined
+        : TInclude extends readonly string[]
+          ? ParentPaths<TInclude[number]>[]
+          : undefined;
+    sort: undefined extends TSortFields
+        ? undefined
+        : TSortFields extends readonly string[]
+          ? Sort<TSortFields[number]>
+          : undefined;
+    fields: undefined extends TSparseFieldSets
+        ? undefined
+        : TSparseFieldSets extends SparseFieldSets
+          ? PartialSparseFieldSets<TSparseFieldSets>
+          : undefined;
     filter: TFilterSchema extends $ZodType ? z.output<TFilterSchema> : undefined;
     page: TPageSchema extends $ZodType ? z.output<TPageSchema> : undefined;
 };
@@ -126,7 +171,7 @@ export type ParseQueryResult<
 /**
  * Builds a schema to validate and transform the `include` parameter
  */
-const buildIncludeSchema = (options: ParseQueryIncludeOptions<string>) =>
+const buildIncludeSchema = (options: ParseQueryIncludeOptions<readonly string[]>) =>
     z
         .string()
         .transform((paths) => (paths === "" ? [] : paths.split(",")))
@@ -153,7 +198,9 @@ const buildIncludeSchema = (options: ParseQueryIncludeOptions<string>) =>
 /**
  * Builds a schema to validate and transform the `sort` parameter
  */
-const buildSortSchema = <TSortFields extends string>(options: ParseQuerySortOptions<TSortFields>) =>
+const buildSortSchema = <TSortFields extends readonly string[]>(
+    options: ParseQuerySortOptions<TSortFields>,
+) =>
     z
         .string()
         .transform((fields): Sort<string> => {
@@ -185,7 +232,7 @@ const buildSortSchema = <TSortFields extends string>(options: ParseQuerySortOpti
             }
 
             for (const field of context.value) {
-                if (!(options.allowed as string[]).includes(field.field)) {
+                if (!(options.allowed as readonly string[]).includes(field.field)) {
                     context.issues.push({
                         code: "custom",
                         message: "Invalid sort field",
@@ -251,8 +298,8 @@ const buildSparseFieldsetSchema = <TSparseFieldSets extends SparseFieldSets>(
  * A query parser that parses a JSON:API-style query string into a strongly typed object.
  */
 export type QueryParser<
-    TInclude extends string | undefined,
-    TSortFields extends string | undefined,
+    TInclude extends readonly string[] | undefined,
+    TSortFields extends readonly string[] | undefined,
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
@@ -282,9 +329,9 @@ export type QueryParser<
  * ```
  */
 export const createQueryParser = <
-    TInclude extends string | undefined,
-    TSortFields extends string | undefined,
-    TSparseFieldSets extends SparseFieldSets | undefined,
+    const TInclude extends readonly string[] | undefined,
+    const TSortFields extends readonly string[] | undefined,
+    const TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
 >(
@@ -297,14 +344,16 @@ export const createQueryParser = <
     NoInfer<TPageSchema>
 > => {
     const schema = z.strictObject({
-        include: options.include
-            ? buildIncludeSchema(options.include)
+        include: options.include?.allowed
+            ? buildIncludeSchema(options.include as ParseQueryIncludeOptions<readonly string[]>)
             : z.undefined({ error: "'include' parameter is not supported" }),
-        sort: options.sort
-            ? buildSortSchema(options.sort)
+        sort: options.sort?.allowed
+            ? buildSortSchema(options.sort as ParseQuerySortOptions<readonly string[]>)
             : z.undefined({ error: "'sort' parameter is not supported" }),
-        fields: options.fields
-            ? buildSparseFieldsetSchema(options.fields)
+        fields: options.fields?.allowed
+            ? buildSparseFieldsetSchema(
+                  options.fields as ParseQuerySparseFieldsetOptions<SparseFieldSets>,
+              )
             : z.undefined({ error: "'fields' parameter is not supported" }),
         filter: options.filter
             ? options.filter

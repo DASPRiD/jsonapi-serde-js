@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { expectTypeOf } from "expect-type";
 import { z } from "zod/v4";
 import { ZodValidationError } from "../../src/common/error.js";
 import { createQueryParser } from "../../src/request/query.js";
@@ -157,3 +158,80 @@ describe("request/query", () => {
         assert.deepEqual(result.include, []);
     });
 });
+
+const typeTests = () => {
+    const undefinedIncludeAllowed = createQueryParser({
+        include: {
+            allowed: undefined,
+        },
+    });
+    expectTypeOf<ReturnType<typeof undefinedIncludeAllowed>>().branded.toEqualTypeOf<{
+        include: undefined;
+        sort: undefined;
+        fields: undefined;
+        filter: undefined;
+        page: undefined;
+    }>();
+
+    createQueryParser({
+        include: {
+            allowed: ["foo"],
+            // @ts-expect-error Invalid default
+            default: ["bar"],
+        },
+    });
+
+    const undefinedSortAllowed = createQueryParser({
+        sort: {
+            allowed: undefined,
+        },
+    });
+    expectTypeOf<ReturnType<typeof undefinedSortAllowed>>().branded.toEqualTypeOf<{
+        include: undefined;
+        sort: undefined;
+        fields: undefined;
+        filter: undefined;
+        page: undefined;
+    }>();
+
+    createQueryParser({
+        sort: {
+            allowed: ["foo"],
+            // @ts-expect-error Invalid default
+            default: [{ field: "bar", order: "asc" }],
+        },
+    });
+
+    const undefinedFieldsAllowed = createQueryParser({
+        fields: {
+            allowed: undefined,
+        },
+    });
+    expectTypeOf<ReturnType<typeof undefinedFieldsAllowed>>().branded.toEqualTypeOf<{
+        include: undefined;
+        sort: undefined;
+        fields: undefined;
+        filter: undefined;
+        page: undefined;
+    }>();
+
+    createQueryParser({
+        fields: {
+            allowed: { foo: ["bar"] },
+            default: {
+                // @ts-expect-error Unknown field
+                foo: ["baz"],
+            },
+        },
+    });
+
+    createQueryParser({
+        fields: {
+            allowed: { foo: ["bar"] },
+            default: {
+                // @ts-expect-error Unknown type
+                bar: [],
+            },
+        },
+    });
+};
