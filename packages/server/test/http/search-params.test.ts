@@ -105,6 +105,11 @@ describe("http/search-params", () => {
             input: "foo=string&foo[]=1",
             expected: { foo: ["1"] },
         },
+        {
+            name: "prevent prototype pollution",
+            input: "__proto__=foo&foo[prototype]=bar&bar[][constructor]=baz",
+            expected: { bar: [{}], foo: {} },
+        },
     ];
 
     for (const { name, input, expected } of testCases) {

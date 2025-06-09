@@ -91,6 +91,8 @@ export type SearchParamsInput = ConstructorParameters<typeof URLSearchParams>[0]
  *
  * Supports bracket and array notation like `user[address][city]=NY`.
  *
+ * Any key parts named `__proto__`, `constructor` or `prototype` are skipped to prevent prototype pollution.
+ *
  * @example
  * ```ts
  * parseSearchParams("foo[0]=bar&foo[1]=baz");
@@ -100,7 +102,7 @@ export type SearchParamsInput = ConstructorParameters<typeof URLSearchParams>[0]
 // biome-ignore lint/complexity/noExcessiveCognitiveComplexity: Kept within one function for performance reasons
 export const parseSearchParams = (input: SearchParamsInput): ParsedSearchParams => {
     const searchParams = new URLSearchParams(input);
-    const result: ParsedSearchParams = {};
+    const result: ParsedSearchParams = Object.create(null);
 
     for (const [key, value] of searchParams) {
         const path = parseKey(key);
@@ -134,6 +136,11 @@ export const parseSearchParams = (input: SearchParamsInput): ParsedSearchParams 
                     : Array.isArray(current) && part === ""
                       ? current.length
                       : part;
+
+            if (key === "__proto__" || key === "constructor" || key === "prototype") {
+                // Skip unsafe keys to prevent prototype pollution
+                continue;
+            }
 
             if (isLast) {
                 current[key] = value;
