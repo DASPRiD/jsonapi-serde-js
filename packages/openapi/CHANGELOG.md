@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.0.3...openapi-v1.0.4) (2025-06-09)
+
+
+### Bug Fixes
+
+* **openapi:** fix export paths ([8fbe146](https://github.com/DASPRiD/jsonapi-serde-js/commit/8fbe146ca54bcb7cd76dc768fdc88b5c22eef4d8))
+
 ## [1.0.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.0.2...openapi-v1.0.3) (2025-06-09)
 
 
