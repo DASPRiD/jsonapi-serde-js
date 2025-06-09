@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - 1.x
 
 permissions:
   contents: write
@@ -12,6 +11,7 @@ permissions:
 
 jobs:
   release-please:
+    name: Release please
     runs-on: ubuntu-latest
 
     outputs:
@@ -40,7 +40,8 @@ jobs:
             const pathsReleased = JSON.parse(process.env.PATHS_RELEASED);
             core.setOutput('any_release_created', pathsReleased.length > 0 ? 'true' : 'false');
 
-  publish:
+  publish-packages:
+    name: Publish packages
     runs-on: ubuntu-latest
     needs: release-please
     if: needs.release-please.outputs.any_release_created == 'true'
@@ -70,3 +71,12 @@ jobs:
 
       - name: Publish
         run: pnpm --filter=!@jsonapi-serde/docs -r publish --access public
+
+  publish-docs:
+    name: Publish docs
+    needs: release-please
+    if: needs.release-please.outputs.any_release_created == 'true'
+    uses: ./.github/workflows/docs.yml
+    permissions:
+      pages: write
+      id-token: write
