@@ -60,6 +60,32 @@ The `data` field of a relationship may be:
 If a related entity is included under `entity` and a serializer for that type has been registered, it will be added to
 the top-level included array (if requested via include).
 
+::: tip NOTE
+
+By default, you will not get type checking against the `type` property. To enable type checking, you have to do two
+things. First you need to export the a `SerializeMap` for your global `serialize` function:
+
+```ts
+import type { InferSerializeMap } from "@jsonapi-serde/server/response";
+
+export type SerializeMap = InferSerializeMap<typeof serialize>;
+```
+
+Then in your serializer definitions, you can do this:
+
+```ts
+import type { SerializedEntity } from "@jsonapi-serde/server/response";
+
+const articleSerializer: EntitySerializer<Article> = {
+    getId: (article) => article.id,
+    serialize: (article, context) => ({
+        /* Your definitions */
+    }) satisfies SerializedEntity<SerializeMap>,
+};
+```
+
+:::
+
 ## Serializer Context
 
 Serializers receive an optional `context` parameter to customize serialization logic.
@@ -92,7 +118,7 @@ const articleSerializer: EntitySerializer<Article, MyContext> = {
 When calling the serializer, context can be provided via the `SerializeOptions.context` property:
 
 ```ts
-const doc = serializer("article", article, {
+const doc = serialize("article", article, {
     context: {
         articles: { locale: "en" },
     },
