@@ -1,5 +1,5 @@
 import type { JsonApiDocument } from "@jsonapi-serde/server/common";
-import type { ParameterizedContext } from "koa";
+import type { Context as KoaContext } from "koa";
 import type { JsonApiContextState } from "./middleware.js";
 
 /**
@@ -24,15 +24,14 @@ import type { JsonApiContextState } from "./middleware.js";
  * });
  * ```
  */
-export const sendJsonApiResponse = (
-    context: ParameterizedContext<Partial<JsonApiContextState>>,
-    document: JsonApiDocument,
-): void => {
+export const sendJsonApiResponse = (context: KoaContext, document: JsonApiDocument): void => {
     if (!context.state.jsonApi) {
         throw new Error("You must register `jsonApiRequestMiddleware` in Koa");
     }
 
-    document.verifyAcceptMediaType(context.state.jsonApi.acceptableTypes);
+    const jsonApiState = context.state as JsonApiContextState;
+
+    document.verifyAcceptMediaType(jsonApiState.jsonApi.acceptableTypes);
 
     context.status = document.getStatus();
     context.body = document.getBody();
