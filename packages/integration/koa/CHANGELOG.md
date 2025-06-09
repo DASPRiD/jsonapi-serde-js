@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.3...integration-koa-v1.0.4) (2025-06-09)
+
+
+### Bug Fixes
+
+* **integration-koa:** export missing request.js ([faf1b9b](https://github.com/DASPRiD/jsonapi-serde-js/commit/faf1b9b3460a47dd17b0b4b7fb7941ee9544d8f3))
+
 ## [1.0.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.2...integration-koa-v1.0.3) (2025-06-09)
 
 
