@@ -5,6 +5,7 @@ export type Cardinality = "one" | "one_nullable" | "many";
 export type RelationshipDefinition = {
     name: string;
     type: string;
+    id?: SchemaObject;
     cardinality: Cardinality;
 };
 
@@ -74,7 +75,7 @@ export const buildResourceSchemaObject = (
                     const resourceIdentifierSchema: SchemaObject = {
                         type: "object",
                         properties: {
-                            id: { type: "string", example: "12345" },
+                            id: relationship.id ?? { type: "string", example: "abc" },
                             type: { type: "string", enum: [relationship.type] },
                         },
                         required: ["id", "type"],

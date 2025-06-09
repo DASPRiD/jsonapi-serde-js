@@ -162,7 +162,7 @@ describe("response", () => {
                                         items: {
                                             type: "object",
                                             properties: {
-                                                id: { type: "string" },
+                                                id: { type: "string", example: "abc" },
                                                 type: { type: "string", enum: ["comment"] },
                                             },
                                             required: ["id", "type"],
@@ -176,6 +176,41 @@ describe("response", () => {
                     },
                 },
                 required: ["relationships"],
+            });
+        });
+
+        it("uses provided idSchema in relationship when given", () => {
+            const result = buildResourceSchemaObject({
+                type: "book",
+                relationships: [
+                    {
+                        name: "author",
+                        type: "person",
+                        id: { type: "string", format: "uuid" },
+                        cardinality: "one",
+                    },
+                ],
+            });
+
+            assert.partialDeepStrictEqual(result, {
+                properties: {
+                    relationships: {
+                        properties: {
+                            author: {
+                                properties: {
+                                    data: {
+                                        properties: {
+                                            id: {
+                                                type: "string",
+                                                format: "uuid",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             });
         });
 
