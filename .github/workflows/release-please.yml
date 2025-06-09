@@ -78,5 +78,6 @@ jobs:
     if: needs.release-please.outputs.any_release_created == 'true'
     uses: ./.github/workflows/docs.yml
     permissions:
+      contents: read
       pages: write
       id-token: write
