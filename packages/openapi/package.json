@@ -1,6 +1,6 @@
 {
     "name": "@jsonapi-serde/openapi",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "OpenAPI schema generation for JSON:API serde",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",
