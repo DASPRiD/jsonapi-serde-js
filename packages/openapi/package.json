@@ -27,10 +27,10 @@
     "exports": {
         "./index": {
             "types": [
-                "./dist/index/index.d.ts",
-                "./src/index/index.ts"
+                "./dist/index.d.ts",
+                "./src/index.ts"
             ],
-            "default": "./dist/index/index.js"
+            "default": "./dist/index.js"
         }
     },
     "devDependencies": {
