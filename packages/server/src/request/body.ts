@@ -98,8 +98,8 @@ export const relationshipSchema = <TDataSchema extends RelationshipDataSchema>(
     schema: TDataSchema,
 ): RelationshipSchema<TDataSchema> =>
     z.strictObject({
-        data: schema as RelationshipDataSchema,
-    });
+        data: schema,
+    }) as unknown as RelationshipSchema<TDataSchema>;
 
 /**
  * Zod schema for a map of named relationships
