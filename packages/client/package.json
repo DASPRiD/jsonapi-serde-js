@@ -37,9 +37,9 @@
         }
     },
     "devDependencies": {
-        "@types/node": "^22.15.29",
+        "@types/node": "^22.15.30",
         "expect-type": "^1.2.1",
-        "zod": "^3.25.42"
+        "zod": "^3.25.56"
     },
     "peerDependencies": {
         "zod": "^3.25.42"

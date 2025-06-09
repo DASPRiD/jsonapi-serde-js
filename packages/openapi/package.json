@@ -36,7 +36,7 @@
     "devDependencies": {
         "@jsonapi-serde/server": "workspace:*",
         "openapi3-ts": "^4.4.0",
-        "zod": "^3.25.42"
+        "zod": "^3.25.56"
     },
     "peerDependencies": {
         "@jsonapi-serde/server": "workspace:*",

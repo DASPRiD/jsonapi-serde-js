@@ -62,7 +62,7 @@
     },
     "devDependencies": {
         "expect-type": "^1.2.1",
-        "zod": "^3.25.42"
+        "zod": "^3.25.56"
     },
     "peerDependencies": {
         "zod": "^3.25.42"
