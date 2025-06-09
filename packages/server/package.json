@@ -1,6 +1,6 @@
 {
     "name": "@jsonapi-serde/server",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Framework agnostic JSON:API serialization and deserialization",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",

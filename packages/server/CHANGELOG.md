@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.1...server-v1.0.2) (2025-06-09)
+
+
+### Bug Fixes
+
+* **server:** prevent prototype polution in search params parser ([68e824f](https://github.com/DASPRiD/jsonapi-serde-js/commit/68e824f2ca49e45df955922c16642af345996c56))
+
 ## [1.0.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.0...server-v1.0.1) (2025-06-08)
 
 
