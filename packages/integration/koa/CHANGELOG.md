@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.4...integration-koa-v1.0.5) (2025-06-09)
+
+
+### Bug Fixes
+
+* **integration-koa:** generalize context in sendJsonApiResponse to allow for any context ([1a8f3b3](https://github.com/DASPRiD/jsonapi-serde-js/commit/1a8f3b3a575831fdf41b39e06a1c3b504760872c))
+
 ## [1.0.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.3...integration-koa-v1.0.4) (2025-06-09)
 
 
