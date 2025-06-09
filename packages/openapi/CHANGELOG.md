@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.0.5...openapi-v1.1.0) (2025-06-09)
+
+
+### Features
+
+* **openapi:** allow defining id schema for relationships ([82f518a](https://github.com/DASPRiD/jsonapi-serde-js/commit/82f518a84cc95be64e88ee714f8e044d27912ff2))
+
 ## [1.0.5](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.0.4...openapi-v1.0.5) (2025-06-09)
 
 
