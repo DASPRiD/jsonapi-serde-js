@@ -86,7 +86,7 @@ export const buildQueryParameters = (
             name: "filter",
             in: "query",
             style: "deepObject",
-            schema: toJSONSchema(options.filter) as SchemaObject,
+            schema: toJSONSchema(options.filter, { io: "input" }) as SchemaObject,
             required,
         });
     }
@@ -102,7 +102,7 @@ export const buildQueryParameters = (
             name: "page",
             in: "query",
             style: "deepObject",
-            schema: toJSONSchema(options.page) as SchemaObject,
+            schema: toJSONSchema(options.page, { io: "input" }) as SchemaObject,
             required,
         });
     }

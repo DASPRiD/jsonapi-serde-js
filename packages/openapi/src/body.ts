@@ -26,19 +26,21 @@ export const buildResourceRequestContentObject = (
     const resourceRequired: string[] = ["type"];
 
     if (options.idSchema) {
-        resourceProperties.id = toJSONSchema(options.idSchema) as SchemaObject;
+        resourceProperties.id = toJSONSchema(options.idSchema, { io: "input" }) as SchemaObject;
         resourceRequired.push("id");
     }
 
     if (options.attributesSchema) {
-        resourceProperties.attributes = toJSONSchema(options.attributesSchema) as SchemaObject;
+        resourceProperties.attributes = toJSONSchema(options.attributesSchema, {
+            io: "input",
+        }) as SchemaObject;
         resourceRequired.push("attributes");
     }
 
     if (options.relationshipsSchema) {
-        resourceProperties.relationships = toJSONSchema(
-            options.relationshipsSchema,
-        ) as SchemaObject;
+        resourceProperties.relationships = toJSONSchema(options.relationshipsSchema, {
+            io: "input",
+        }) as SchemaObject;
         resourceRequired.push("relationships");
     }
 
@@ -65,16 +67,16 @@ export const buildResourceRequestContentObject = (
                     const required: string[] = ["lid", "type"];
 
                     if (options.attributesSchema) {
-                        properties.attributes = toJSONSchema(
-                            options.attributesSchema,
-                        ) as SchemaObject;
+                        properties.attributes = toJSONSchema(options.attributesSchema, {
+                            io: "input",
+                        }) as SchemaObject;
                         required.push("attributes");
                     }
 
                     if (options.relationshipsSchema) {
-                        properties.relationships = toJSONSchema(
-                            options.relationshipsSchema,
-                        ) as SchemaObject;
+                        properties.relationships = toJSONSchema(options.relationshipsSchema, {
+                            io: "input",
+                        }) as SchemaObject;
                         required.push("relationships");
                     }
 
@@ -117,7 +119,7 @@ export const buildRelationshipsRequestContentObject = (
                     properties: {
                         type: { type: "string", enum: [type] },
                         id: idSchema
-                            ? (toJSONSchema(idSchema) as SchemaObject)
+                            ? (toJSONSchema(idSchema, { io: "input" }) as SchemaObject)
                             : { type: "string", example: "abc" },
                     },
                     required: ["id", "type"],
