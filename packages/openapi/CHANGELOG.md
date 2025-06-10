@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.1.0...openapi-v1.1.1) (2025-06-10)
+
+
+### Bug Fixes
+
+* **openapi:** set toJSONSchema 'io' option to 'input' ([6d95b9c](https://github.com/DASPRiD/jsonapi-serde-js/commit/6d95b9c34fc9787e3158a5b54b662aabd18aebbd))
+
 ## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.0.5...openapi-v1.1.0) (2025-06-09)
 
 
