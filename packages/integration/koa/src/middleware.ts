@@ -48,9 +48,9 @@ export const jsonApiRequestMiddleware = (): Middleware<Partial<JsonApiContextSta
                 },
             }).toDocument();
 
-            context.set("Content-Type", document.getContentType());
             context.status = document.getStatus();
             context.body = document.getBody();
+            context.set("Content-Type", document.getContentType());
             return;
         }
 
@@ -133,9 +133,9 @@ export const jsonApiErrorMiddleware = (options?: ErrorMiddlewareOptions): Middle
             options?.logError?.(error, exposed);
 
             const document = jsonApiError.toDocument();
-            context.set("Content-Type", document.getContentType());
             context.status = document.getStatus();
             context.body = document.getBody();
+            context.set("Content-Type", document.getContentType());
         }
     };
 };
