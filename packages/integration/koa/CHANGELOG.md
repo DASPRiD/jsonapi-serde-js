@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.6...integration-koa-v1.0.7) (2025-06-19)
+
+
+### Bug Fixes
+
+* **integration-koa:** write content type header after setting body in middlewares ([83df3b8](https://github.com/DASPRiD/jsonapi-serde-js/commit/83df3b8da0ca4a4a129a13b8decfa21bbd90623f))
+
 ## [1.0.6](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.5...integration-koa-v1.0.6) (2025-06-19)
 
 
