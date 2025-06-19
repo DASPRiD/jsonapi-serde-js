@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.6](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.5...integration-koa-v1.0.6) (2025-06-19)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.0.4
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.0.4
+
 ## [1.0.5](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.4...integration-koa-v1.0.5) (2025-06-09)
 
 

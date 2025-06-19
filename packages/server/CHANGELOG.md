@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.3...server-v1.0.4) (2025-06-19)
+
+
+### Bug Fixes
+
+* **server:** call toString() method instead of referencing it ([c6afa1a](https://github.com/DASPRiD/jsonapi-serde-js/commit/c6afa1accb6550d850eb3b48660a102d36f96584))
+
 ## [1.0.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.2...server-v1.0.3) (2025-06-09)
 
 
