@@ -140,7 +140,7 @@ export class ZodValidationError extends JsonApiError {
         return {
             parameter: `${path[0].toString()}${path
                 .slice(1)
-                .map((element) => `[${element.toString}]`)
+                .map((element) => `[${element.toString()}]`)
                 .join()}`,
         };
     }
