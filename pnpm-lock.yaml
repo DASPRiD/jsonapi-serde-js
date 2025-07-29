@@ -75,8 +75,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       koa:
-        specifier: ^3.0.0
-        version: 3.0.0
+        specifier: ^3.0.1
+        version: 3.0.1
       koa-tree-router:
         specifier: ^0.13.1
         version: 0.13.1
@@ -905,10 +905,6 @@ packages:
       monocart-coverage-reports:
         optional: true
 
-  cache-content-type@1.0.1:
-    resolution: {integrity: sha512-IKufZ1o4Ut42YUrZSo8+qnMTrFuKkvyoLXUywKz9GJ5BrhOFGhLdkx9sG4KAnVvbY6kEcSFjLQul+DVmBm2bgA==}
-    engines: {node: '>= 6.0.0'}
-
   callsites@3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
@@ -1272,8 +1268,8 @@ packages:
     resolution: {integrity: sha512-MFsDRupP6crtCVgt+kZmg8jgeFZqkr3iumZcIzXfMoSsI4NfhnHVnUb+4ANdgH50QmFmk03ez3Vt8X+FE6Rj6g==}
     engines: {node: '>=12.0'}
 
-  koa@3.0.0:
-    resolution: {integrity: sha512-Usyqf1o+XN618R3Jzq4S4YWbKsRtPcGpgyHXD4APdGYQQyqQ59X+Oyc7fXHS2429stzLsBiDjj6zqqYe8kknfw==}
+  koa@3.0.1:
+    resolution: {integrity: sha512-oDxVkRwPOHhGlxKIDiDB2h+/l05QPtefD7nSqRgDfZt8P+QVYFWjfeK8jANf5O2YXjk8egd7KntvXKYx82wOag==}
     engines: {node: '>= 18'}
 
   kolorist@1.8.0:
@@ -1873,10 +1869,6 @@ packages:
   yargs@17.7.2:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
-
-  ylru@1.4.0:
-    resolution: {integrity: sha512-2OQsPNEmBCvXuFlIni/a+Rn+R2pHW9INm0BxXJ4hVDA8TirqMj+J/Rp9ItLatT/5pZqWwefVrTQcHpixsxnVlA==}
-    engines: {node: '>= 4.0.0'}
 
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -2689,11 +2681,6 @@ snapshots:
       yargs: 17.7.2
       yargs-parser: 21.1.1
 
-  cache-content-type@1.0.1:
-    dependencies:
-      mime-types: 2.1.35
-      ylru: 1.4.0
-
   callsites@3.1.0: {}
 
   ccount@2.0.1: {}
@@ -3041,14 +3028,12 @@ snapshots:
       '@types/koa': 2.15.0
       koa-compose: 4.1.0
 
-  koa@3.0.0:
+  koa@3.0.1:
     dependencies:
       accepts: 1.3.8
-      cache-content-type: 1.0.1
       content-disposition: 0.5.4
       content-type: 1.0.5
       cookies: 0.9.1
-      debug: 4.4.1
       delegates: 1.0.0
       destroy: 1.2.0
       encodeurl: 2.0.0
@@ -3057,13 +3042,12 @@ snapshots:
       http-assert: 1.5.0
       http-errors: 2.0.0
       koa-compose: 4.1.0
+      mime-types: 3.0.1
       on-finished: 2.4.1
       parseurl: 1.3.3
       statuses: 2.0.2
       type-is: 2.0.1
       vary: 1.1.2
-    transitivePeerDependencies:
-      - supports-color
 
   kolorist@1.8.0: {}
 
@@ -3663,8 +3647,6 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
-
-  ylru@1.4.0: {}
 
   yocto-queue@0.1.0: {}
 
