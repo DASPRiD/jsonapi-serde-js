@@ -1,8 +1,7 @@
 import { z } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
 import { JsonApiError, ZodValidationError, ZodValidationErrorParams } from "../common/index.js";
-import { ContentTypeParser, type ParsedContentType } from "../http/index.js";
-import { MediaTypeParserError } from "../http/index.js";
+import { ContentTypeParser, MediaTypeParserError, type ParsedContentType } from "../http/index.js";
 
 /**
  * Represents the structure of the request body and its content type
@@ -543,7 +542,7 @@ const validateContentType = (contentType: string | undefined): void => {
         });
     }
 
-    const { ext, profile, ...rest } = parts.parameters;
+    const { ext: _ext, profile: _profile, ...rest } = parts.parameters;
 
     if (Object.keys(rest).length === 0) {
         return;

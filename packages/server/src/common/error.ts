@@ -105,7 +105,7 @@ export class ZodValidationError extends JsonApiError {
                         ? error.params
                         : null;
 
-                const { code, input, path, message, ...rest } = error;
+                const { code, input: _input, path, message, ...rest } = error;
                 const meta = params
                     ? Object.fromEntries(Object.entries(rest).filter(([key]) => key !== "params"))
                     : rest;

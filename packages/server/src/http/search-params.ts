@@ -1,12 +1,12 @@
 /**
  * Matches the full key with optional bracketed subkeys (e.g., "user[address][city]")
  */
-const fullKeyRegex = /^([^\[\]]+)((?:\[[^\[\]]*])*)$/;
+const fullKeyRegex = /^([^[\]]+)((?:\[[^[\]]*])*)$/;
 
 /**
  * Matches each bracketed section inside a key (e.g., "[address]", "[city]")
  */
-const bracketsRegex = /\[([^\[\]]*)]/g;
+const bracketsRegex = /\[([^[\]]*)]/g;
 
 /**
  * Matches numeric array indices (e.g., "0", "1")

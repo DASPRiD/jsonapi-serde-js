@@ -4,9 +4,9 @@ import { JsonApiDocument } from "../common/response.js";
 import type {
     IncludableResourceIdentifier,
     InferEntity,
+    SerializedEntity,
     SerializeMap,
     SerializeOptions,
-    SerializedEntity,
     SerializerContext,
 } from "./serializer.js";
 

@@ -1,8 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { $ZodError } from "zod/v4/core";
-import { type ErrorObject, handleJsonApiError } from "../src/index.js";
-import { JsonApiError } from "../src/index.js";
+import { type ErrorObject, handleJsonApiError, JsonApiError } from "../src/index.js";
 
 const mockErrorObject: ErrorObject = {
     status: "404",

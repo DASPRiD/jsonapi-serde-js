@@ -248,7 +248,12 @@ const flattenResource = (
         id: resource.id,
         ...(resource.attributes ?? {}),
         ...(resource.relationships
-            ? flattenRelationships(resource.relationships, includedMap, resourceSchemaCache, path)
+            ? flattenRelationships(
+                  resource.relationships as ParsedRelationships,
+                  includedMap,
+                  resourceSchemaCache,
+                  path,
+              )
             : {}),
         ...(resource.meta ? { $meta: resource.meta } : {}),
         ...(resource.links ? { $links: resource.links } : {}),
@@ -267,7 +272,13 @@ const flattenRelationships = (
     Object.fromEntries(
         Object.entries(relationships).map(([key, relationship]) => [
             key,
-            flattenRelationship(key, relationship, includedMap, resourceSchemaCache, parentPath),
+            flattenRelationship(
+                key,
+                relationship as ParsedRelationship,
+                includedMap,
+                resourceSchemaCache,
+                parentPath,
+            ),
         ]),
     );
 

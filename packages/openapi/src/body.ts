@@ -5,8 +5,8 @@ import type {
     RelationshipsSchema,
 } from "@jsonapi-serde/server/request";
 import type { ContentObject, SchemaObject } from "openapi3-ts/oas31";
-import { toJSONSchema } from "zod/v4/core";
 import type { $ZodType } from "zod/v4/core";
+import { toJSONSchema } from "zod/v4/core";
 
 /**
  * Generates an OpenAPI 3.1 content object for resource requests based on parser options

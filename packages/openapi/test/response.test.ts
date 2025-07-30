@@ -2,13 +2,13 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import type { SchemaObject } from "openapi3-ts/oas31";
 import {
-    type LinkSchemaObjects,
-    type MetaSchemaObject,
     buildDataResponseObject,
     buildErrorResponseObject,
     buildResourceSchemaObject,
+    type LinkSchemaObjects,
     linkObjectSchemaObject,
     linkStringSchemaObject,
+    type MetaSchemaObject,
 } from "../src/index.js";
 
 describe("response", () => {

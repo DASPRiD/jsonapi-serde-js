@@ -1,8 +1,8 @@
 import { JsonApiError } from "@jsonapi-serde/server/common";
 import {
+    getAcceptableMediaTypes,
     type JsonApiMediaType,
     MediaTypeParserError,
-    getAcceptableMediaTypes,
 } from "@jsonapi-serde/server/http";
 import { isHttpError } from "http-errors";
 import type { Middleware } from "koa";

@@ -1,16 +1,17 @@
 {
     "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-    "organizeImports": {
-        "enabled": true
-    },
+    "assist": { "actions": { "source": { "organizeImports": "on" } } },
     "files": {
-        "include": [
+        "includes": [
             "biome.json",
             "commitlint.config.cjs",
             "release-please-config.json",
-            "packages/**/*"
-        ],
-        "ignore": ["package.json", "dist/**/*", "coverage/**/*", ".vitepress/cache/**/*"]
+            "packages/**/*",
+            "!**/.vitepress/cache/**/*",
+            "!**/dist/**/*",
+            "!**/package.json",
+            "!**/coverage/**/*"
+        ]
     },
     "linter": {
         "enabled": true,
@@ -21,24 +22,37 @@
                 "useSimplifiedLogicExpression": "error"
             },
             "correctness": {
-                "noNewSymbol": "error",
                 "noUnusedImports": "error",
                 "noUnusedPrivateClassMembers": "error",
-                "useHookAtTopLevel": "error"
+                "useHookAtTopLevel": "error",
+                "noInvalidBuiltinInstantiation": "error",
+                "noSwitchDeclarations": "error"
             },
             "style": {
                 "useBlockStatements": "error",
                 "useCollapsedElseIf": "error",
                 "useForOf": "error",
                 "useFragmentSyntax": "error",
-                "useShorthandArrayType": "error",
                 "useShorthandAssign": "error",
-                "useSingleCaseStatement": "error"
+                "noParameterAssign": "error",
+                "useAsConstAssertion": "error",
+                "useDefaultParameterLast": "error",
+                "useEnumInitializers": "error",
+                "useSelfClosingElements": "error",
+                "useSingleVarDeclarator": "error",
+                "noUnusedTemplateLiteral": "error",
+                "useNumberNamespace": "error",
+                "noInferrableTypes": "error",
+                "noUselessElse": "error",
+                "useConsistentArrayType": { "level": "error", "options": { "syntax": "shorthand" } }
             },
             "suspicious": {
                 "noApproximativeNumericConstant": "warn",
-                "noConsoleLog": "error",
-                "noEmptyBlockStatements": "error"
+                "noEmptyBlockStatements": "error",
+                "noConsole": {
+                    "level": "error",
+                    "options": { "allow": ["assert", "error", "info", "warn", "debug"] }
+                }
             }
         }
     },

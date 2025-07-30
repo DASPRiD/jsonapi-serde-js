@@ -144,13 +144,7 @@ describe("request/query", () => {
     it("should allow disabling parameters", () => {
         const parseQuery = createQueryParser({});
         const result = parseQuery("");
-        assert.deepEqual(result, {
-            include: undefined,
-            sort: undefined,
-            fields: undefined,
-            filter: undefined,
-            page: undefined,
-        });
+        assert.deepEqual(result, {});
     });
 
     it("should treat empty include as undefined", () => {
@@ -159,7 +153,7 @@ describe("request/query", () => {
     });
 });
 
-const typeTests = () => {
+const _typeTests = () => {
     const undefinedIncludeAllowed = createQueryParser({
         include: {
             allowed: undefined,

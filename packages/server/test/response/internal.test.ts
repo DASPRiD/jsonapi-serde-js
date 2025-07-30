@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import type { EntitySerializer, SerializeMap, SerializedEntity } from "../../src/response/index.js";
+import type { EntitySerializer, SerializedEntity, SerializeMap } from "../../src/response/index.js";
 import { serializeDocument } from "../../src/response/internal.js";
 
 const user = { id: "1", name: "Alice" };

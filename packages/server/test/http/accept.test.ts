@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { AcceptParser, type ParsedAccept, getAcceptableMediaTypes } from "../../src/http/accept.js";
+import { AcceptParser, getAcceptableMediaTypes, type ParsedAccept } from "../../src/http/accept.js";
 import { MediaTypeParserError } from "../../src/http/media-type-parser.js";
 
 describe("http/accept", () => {

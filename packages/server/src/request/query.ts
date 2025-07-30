@@ -2,7 +2,7 @@ import { z } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
 import { ZodValidationError, ZodValidationErrorParams } from "../common/error.js";
 import type { ParentPaths } from "../common/utils.js";
-import { type SearchParamsInput, parseSearchParams } from "../http/index.js";
+import { parseSearchParams, type SearchParamsInput } from "../http/index.js";
 
 /**
  * Options for the `include` query parameter

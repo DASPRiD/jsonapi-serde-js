@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { type TopLevelLinks, extractPageParams, injectPageParams } from "../src/index.js";
+import { extractPageParams, injectPageParams, type TopLevelLinks } from "../src/index.js";
 
 describe("pagination", () => {
     describe("extractPageParams", () => {
