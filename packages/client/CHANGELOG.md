@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.0.1...client-v1.1.0) (2025-07-30)
+
+
+### Features
+
+* add support for zod v4 stable ([a575177](https://github.com/DASPRiD/jsonapi-serde-js/commit/a5751773ce4747867301b21ee8532d4c311032b1))
+
 ## [1.0.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.0.0...client-v1.0.1) (2025-06-09)
 
 

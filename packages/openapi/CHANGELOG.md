@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.1.2...openapi-v1.2.0) (2025-07-30)
+
+
+### Features
+
+* add support for zod v4 stable ([a575177](https://github.com/DASPRiD/jsonapi-serde-js/commit/a5751773ce4747867301b21ee8532d4c311032b1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.1.0
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.1.0
+
 ## [1.1.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.1.1...openapi-v1.1.2) (2025-06-19)
 
 
