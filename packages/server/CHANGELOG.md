@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.1.0...server-v1.2.0) (2025-08-20)
+
+
+### Features
+
+* add taxum integration ([7ae5c95](https://github.com/DASPRiD/jsonapi-serde-js/commit/7ae5c95b20b570911aa68e2308d6d4c4d0972591))
+
 ## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.0.4...server-v1.1.0) (2025-07-30)
 
 
