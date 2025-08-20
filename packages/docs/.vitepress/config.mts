@@ -63,6 +63,10 @@ export default defineConfig({
                                 text: "Koa",
                                 link: "/server/integration/koa",
                             },
+                            {
+                                text: "Taxum",
+                                link: "/server/integration/taxum",
+                            },
                         ],
                     },
                     {

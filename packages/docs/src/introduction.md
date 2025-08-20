@@ -26,6 +26,8 @@ To ease integration with specific web servers, additional packages provide glue 
 
 - **Koa Integration**: `@jsonapi-serde/integration-koa`  
   This adapter simplifies request/response handling in Koa apps.
+- **Taxum Integration**: `@jsonapi-serde/integration-taxum`  
+  This adapter simplifies request/response handling in Taxum apps.
 
 More integrations (e.g., for Express, Hapi, Fastify) can be added based on demand or contributions.
 
