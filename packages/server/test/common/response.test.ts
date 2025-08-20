@@ -31,6 +31,11 @@ describe("common/response", () => {
                 profiles: ["profile1", "profile2"],
             });
 
+            assert.deepEqual(document.getMediaTypeOptions(), {
+                extensions: ["ext1"],
+                profiles: ["profile1", "profile2"],
+            });
+
             assert.deepEqual(document.getBody(), {
                 jsonapi: {
                     version: "1.1",
