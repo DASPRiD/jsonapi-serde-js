@@ -37,7 +37,7 @@ If the `Accept` header is malformed or unsupported, it responds with a JSON:API 
 
 ```ts
 import Koa from "koa";
-import { jsonApiRequestMiddleware } from "@jsonapi-serde/koa";
+import { jsonApiRequestMiddleware } from "@jsonapi-serde/integration-koa";
 
 const app = new Koa();
 app.use(jsonApiRequestMiddleware());
@@ -50,7 +50,7 @@ Catches errors thrown during request handling and formats them as JSON:API error
 You can optionally provide a logger callback:
 
 ```ts
-import { jsonApiErrorMiddleware } from "@jsonapi-serde/koa";
+import { jsonApiErrorMiddleware } from "@jsonapi-serde/integration-koa";
 
 app.use(jsonApiErrorMiddleware({
     logError: (error, exposed) => {
@@ -69,7 +69,7 @@ Extracts the raw request body and `Content-Type` header from the Koa context int
 `@jsonapi-serde/server` parsers.
 
 ```ts
-import { bodyContext } from "@jsonapi-serde/koa";
+import { bodyContext } from "@jsonapi-serde/integration-koa";
 
 const parsed = parseResourceRequest(
     bodyContext(ctx),
@@ -101,7 +101,7 @@ The package provides `treeRouterMethodNotAllowedHandler` to handle unsupported H
 JSON:API errors.
 
 ```ts
-import { treeRouterMethodNotAllowedHandler } from "@jsonapi-serde/koa/tree-router";
+import { treeRouterMethodNotAllowedHandler } from "@jsonapi-serde/integration-koa/tree-router";
 import Router from "koa-tree-router";
 
 const router = new Router({ onMethodNotAllowed: treeRouterMethodNotAllowedHandler });
@@ -119,7 +119,7 @@ import {
     bodyContext,
     sendJsonApiResponse,
     treeRouterMethodNotAllowedHandler
-} from "@jsonapi-serde/koa";
+} from "@jsonapi-serde/integration-koa";
 import { parseResourceRequest, SerializeBuilder } from "@jsonapi-serde/server";
 import { z } from "zod";
 import { SerializeBuilder } from "./serializer";

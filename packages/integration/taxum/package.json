@@ -1,7 +1,7 @@
 {
-    "name": "@jsonapi-serde/integration-koa",
+    "name": "@jsonapi-serde/integration-taxum",
     "version": "1.1.0",
-    "description": "Koa integration for @jsonapi-serde/server",
+    "description": "Taxum integration for @jsonapi-serde/server",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",
     "license": "BSD-3-Clause",
@@ -12,7 +12,7 @@
         "serializer",
         "deserializer",
         "parser",
-        "koa"
+        "taxum"
     ],
     "repository": {
         "type": "git",
@@ -35,19 +35,25 @@
             ],
             "@jsonapi-serde": "./src/index.ts",
             "default": "./dist/index.js"
+        },
+        "./augment": {
+            "types": [
+                "./dist/augment.d.ts",
+                "./src/augment.ts"
+            ],
+            "@jsonapi-serde": "./src/augment.ts",
+            "default": "./dist/augment.js"
         }
     },
     "devDependencies": {
         "@jsonapi-serde/server": "workspace:^",
-        "@types/http-errors": "^2.0.5",
-        "@types/koa": "^3.0.0",
-        "http-errors": "^2.0.0",
-        "koa": "^3.0.1",
-        "koa-tree-router": "^0.13.1"
+        "@standard-schema/spec": "^1.0.0",
+        "@taxum/core": "^0.8.0",
+        "zod": "^4.0.17"
     },
     "peerDependencies": {
         "@jsonapi-serde/server": "workspace:^",
-        "http-errors": "^1.0.0 || ^2.0.0",
-        "koa": "^2.0.0 || ^3.0.0"
+        "@taxum/core": "^0.1.0",
+        "zod": "^4.0.14"
     }
 }

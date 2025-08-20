@@ -15,6 +15,10 @@ component_management:
       name: "Integration: Koa"
       paths:
         - packages/integration/koa/**
+    - component_id: integration_taxum
+      name: "Integration: Taxum"
+      paths:
+        - packages/integration/taxum/**
     - component_id: client
       name: Client
       paths:

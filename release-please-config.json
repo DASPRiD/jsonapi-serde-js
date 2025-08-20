@@ -3,6 +3,7 @@
     "packages": {
         "packages/server": {},
         "packages/integration/koa": {},
+        "packages/integration/taxum": {},
         "packages/openapi": {},
         "packages/client": {}
     },

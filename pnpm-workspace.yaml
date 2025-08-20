@@ -1,3 +1,6 @@
 packages:
   - packages/*
   - packages/integration/*
+onlyBuiltDependencies:
+  - esbuild
+  - lefthook

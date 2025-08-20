@@ -76,6 +76,13 @@ export class JsonApiDocument {
     }
 
     /**
+     * Returns the media type options, if set.
+     */
+    public getMediaTypeOptions(): MediaTypeOptions | undefined {
+        return this.mediaTypeOptions;
+    }
+
+    /**
      * Verifies that the client accepts the content type of this document
      *
      * @throws {JsonApiError} if content type is not acceptable
