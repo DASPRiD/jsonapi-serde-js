@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.1.0...integration-koa-v1.2.0) (2025-08-20)
+
+
+### Features
+
+* add taxum integration ([7ae5c95](https://github.com/DASPRiD/jsonapi-serde-js/commit/7ae5c95b20b570911aa68e2308d6d4c4d0972591))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.2.0
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.2.0
+
 ## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-koa-v1.0.7...integration-koa-v1.1.0) (2025-07-30)
 
 
