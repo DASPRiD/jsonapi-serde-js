@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.0.0...integration-taxum-v1.0.1) (2025-08-21)
+
+
+### Bug Fixes
+
+* **integration-taxum:** re-export augmented objects ([c1994e9](https://github.com/DASPRiD/jsonapi-serde-js/commit/c1994e9d48571e7a219394e286a81186b373c2d8))
+
 ## 1.0.0 (2025-08-20)
 
 
