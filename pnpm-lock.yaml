@@ -90,8 +90,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       '@taxum/core':
-        specifier: ^0.8.0
-        version: 0.8.0
+        specifier: ^0.9.0
+        version: 0.9.0
       zod:
         specifier: ^4.0.17
         version: 4.0.17
@@ -691,8 +691,8 @@ packages:
   '@standard-schema/spec@1.0.0':
     resolution: {integrity: sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==}
 
-  '@taxum/core@0.8.0':
-    resolution: {integrity: sha512-VyHn3l5OI6lOxu6Y/jcLirFzKBVBhZtkMj3DP+cWBlOwquWewMsluucjnQraKa+AEbP1Spz4KPbfCxJnoz5SiQ==}
+  '@taxum/core@0.9.0':
+    resolution: {integrity: sha512-4Nkv7qg9gn+AoFQmpqqWDzVVaW9l7YgBgClu5rijSZMcbTmg3T9j0uv++ChYOZxzNYaDK9CsWLFYD1VQc4ejbA==}
 
   '@tsconfig/node22@22.0.2':
     resolution: {integrity: sha512-Kmwj4u8sDRDrMYRoN9FDEcXD8UpBSaPQQ24Gz+Gamqfm7xxn+GBR7ge/Z7pK8OXNGyUzbSwJj+TH6B+DS/epyA==}
@@ -2484,7 +2484,7 @@ snapshots:
 
   '@standard-schema/spec@1.0.0': {}
 
-  '@taxum/core@0.8.0':
+  '@taxum/core@0.9.0':
     dependencies:
       '@standard-schema/spec': 1.0.0
       find-my-way: 9.3.0
