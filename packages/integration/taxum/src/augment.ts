@@ -38,3 +38,6 @@ declare module "@jsonapi-serde/server/common" {
 };
 
 const EMPTY_TOP_LEVEL_MEMBERS: TopLevelMembers = { meta: {} };
+
+// This re-export is required for TypeScript to pick up the augmentation.
+export { JsonApiDocument, JsonApiError };

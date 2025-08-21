@@ -48,12 +48,12 @@
     "devDependencies": {
         "@jsonapi-serde/server": "workspace:^",
         "@standard-schema/spec": "^1.0.0",
-        "@taxum/core": "^0.8.0",
+        "@taxum/core": ">=0.8.0 <1.0.0",
         "zod": "^4.0.17"
     },
     "peerDependencies": {
         "@jsonapi-serde/server": "workspace:^",
-        "@taxum/core": "^0.1.0",
+        "@taxum/core": ">=0.8.0 <1.0.0",
         "zod": "^4.0.14"
     }
 }
