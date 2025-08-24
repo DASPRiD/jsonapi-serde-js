@@ -11,7 +11,7 @@ describe("router", () => {
             const req = HttpRequest.builder().body(null);
             const res = HttpResponse.from(await notFoundHandler(req));
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         status: "404",
@@ -28,7 +28,7 @@ describe("router", () => {
             const req = HttpRequest.builder().body(null);
             const res = HttpResponse.from(await methodNotAllowedHandler(req));
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         status: "405",

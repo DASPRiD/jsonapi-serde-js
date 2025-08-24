@@ -38,7 +38,7 @@ class JsonApiMediaTypes implements HttpService {
         let acceptableMediaTypes: JsonApiMediaType[];
 
         try {
-            acceptableMediaTypes = getAcceptableMediaTypes(req.headers.get("accept") ?? "");
+            acceptableMediaTypes = getAcceptableMediaTypes(req.headers.get("accept")?.value ?? "");
         } catch (error) {
             /* node:coverage disable */
             if (!(error instanceof MediaTypeParserError)) {

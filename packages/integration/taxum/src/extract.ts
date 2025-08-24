@@ -142,11 +142,11 @@ export const jsonApiRelationships =
  * Creates a {@link BodyContext} from an {@link HttpRequest}.
  */
 const createBodyContext = async (req: HttpRequest): Promise<BodyContext> => {
-    const body = await consumers.text(req.body);
+    const body = await consumers.text(req.body.readable);
 
     return {
         body: body,
         /* node:coverage ignore next */
-        contentType: req.headers.get("content-type") ?? undefined,
+        contentType: req.headers.get("content-type")?.value ?? undefined,
     };
 };

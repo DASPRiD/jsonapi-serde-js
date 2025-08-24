@@ -29,7 +29,7 @@ describe("error-handler", () => {
         assert.equal(exposedFlag, true);
         assert.equal(res.status, StatusCode.CONFLICT);
 
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             errors: [
                 {
                     code: "already_registered",
@@ -51,7 +51,7 @@ describe("error-handler", () => {
 
         assert.equal(res.status, StatusCode.UNPROCESSABLE_CONTENT);
 
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             errors: [
                 {
                     code: "unprocessable_entity",
@@ -78,7 +78,7 @@ describe("error-handler", () => {
         assert.equal(exposedFlag, false);
         assert.equal(res.status, StatusCode.INTERNAL_SERVER_ERROR);
 
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             errors: [
                 {
                     status: "500",
@@ -97,7 +97,7 @@ describe("error-handler", () => {
 
         assert.equal(res.status, StatusCode.BAD_REQUEST);
 
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             errors: [
                 {
                     status: "400",
@@ -144,7 +144,7 @@ describe("error-handler", () => {
 
             assert.equal(res.status, StatusCode.UNPROCESSABLE_CONTENT);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         status: "422",
@@ -177,7 +177,7 @@ describe("error-handler", () => {
 
             assert.equal(res.status, StatusCode.BAD_REQUEST);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         status: "400",
@@ -207,7 +207,7 @@ describe("error-handler", () => {
             const errorHandler = jsonApiErrorHandler();
             const res = errorHandler(error);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [{}],
             });
         });
@@ -228,7 +228,7 @@ describe("error-handler", () => {
             const errorHandler = jsonApiErrorHandler();
             const res = errorHandler(error);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [{}],
             });
         });
@@ -249,7 +249,7 @@ describe("error-handler", () => {
             const errorHandler = jsonApiErrorHandler();
             const res = errorHandler(error);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         source: {
@@ -276,7 +276,7 @@ describe("error-handler", () => {
             const errorHandler = jsonApiErrorHandler();
             const res = errorHandler(error);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [{}],
             });
         });
@@ -297,7 +297,7 @@ describe("error-handler", () => {
             const errorHandler = jsonApiErrorHandler();
             const res = errorHandler(error);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [{}],
             });
         });
@@ -320,7 +320,7 @@ describe("error-handler", () => {
 
             assert.equal(res.status, StatusCode.BAD_REQUEST);
 
-            assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+            assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
                 errors: [
                     {
                         status: "400",

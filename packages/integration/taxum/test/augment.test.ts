@@ -16,7 +16,7 @@ describe("augment", () => {
         ext([{ ext: [], profile: [] }]);
 
         assert.equal(res.status, StatusCode.CREATED);
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             jsonapi: { version: "1.1" },
         });
     });
@@ -30,7 +30,7 @@ describe("augment", () => {
         ext([{ ext: [], profile: [] }]);
 
         assert.equal(res.status, StatusCode.BAD_REQUEST);
-        assert.partialDeepStrictEqual(await consumers.json(res.body.read()), {
+        assert.partialDeepStrictEqual(await consumers.json(res.body.readable), {
             jsonapi: { version: "1.1" },
         });
     });
