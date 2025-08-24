@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.2.0...server-v1.3.0) (2025-08-24)
+
+
+### Features
+
+* **integration-taxum:** update to latest taxum version ([0426d0c](https://github.com/DASPRiD/jsonapi-serde-js/commit/0426d0c5757c98d84c094622fbd78080f7f14291))
+
 ## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.1.0...server-v1.2.0) (2025-08-20)
 
 
