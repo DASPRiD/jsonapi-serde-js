@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.1.0...integration-taxum-v1.2.0) (2025-09-13)
+
+
+### Features
+
+* **integration-taxum:** update to taxum 1.0.0 ([e3d6d48](https://github.com/DASPRiD/jsonapi-serde-js/commit/e3d6d48728741a6b02bdbd33b50def52b6a88fd8))
+
 ## [1.1.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.0.1...integration-taxum-v1.1.0) (2025-08-24)
 
 
