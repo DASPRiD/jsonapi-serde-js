@@ -65,6 +65,9 @@ jobs:
       - name: Build
         run: pnpm --filter=!@jsonapi-serde/docs -r build
 
+      - name: Update npm
+        run: npm install -g npm@latest
+
       - name: Publish
         run: pnpm --filter=!@jsonapi-serde/docs -r publish --access public
 
