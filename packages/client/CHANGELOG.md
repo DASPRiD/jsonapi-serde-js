@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.0...client-v1.2.1) (2025-10-11)
+
+
+### Bug Fixes
+
+* **client:** bump dependencies ([7a398bc](https://github.com/DASPRiD/jsonapi-serde-js/commit/7a398bc26a44be0ebe33d50ce25fabd2a635920c))
+
 ## [1.2.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.1.0...client-v1.2.0) (2025-08-24)
 
 
