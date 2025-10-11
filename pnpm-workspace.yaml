@@ -1,3 +1,4 @@
+sideEffectsCache: false
 packages:
   - packages/*
   - packages/integration/*

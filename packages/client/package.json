@@ -14,7 +14,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/dasprid/jsonapi-serde-js.git"
+        "url": "https://github.com/DASPRiD/jsonapi-serde-js.git"
     },
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
