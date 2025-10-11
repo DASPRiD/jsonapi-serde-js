@@ -104,7 +104,7 @@ export const relationshipSchema = <TDataSchema extends RelationshipDataSchema>(
  * Zod schema for a map of named relationships
  */
 export type RelationshipsSchema = $ZodType<
-    Record<string, z.output<RelationshipSchema<RelationshipDataSchema>>>
+    Record<string, z.output<RelationshipSchema<RelationshipDataSchema>>> | undefined
 >;
 
 /**

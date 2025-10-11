@@ -6,6 +6,7 @@ on:
       - main
 
 permissions:
+  id-token: write
   contents: write
   pull-requests: write
 
@@ -63,11 +64,6 @@ jobs:
 
       - name: Build
         run: pnpm --filter=!@jsonapi-serde/docs -r build
-
-      - name: Set publishing config
-        run: pnpm config set '//registry.npmjs.org/:_authToken' "${NODE_AUTH_TOKEN}"
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish
         run: pnpm --filter=!@jsonapi-serde/docs -r publish --access public
