@@ -1,6 +1,6 @@
 {
     "name": "@jsonapi-serde/integration-koa",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Koa integration for @jsonapi-serde/server",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",
