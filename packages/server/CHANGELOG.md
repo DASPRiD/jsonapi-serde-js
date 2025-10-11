@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.3.0...server-v1.4.0) (2025-10-11)
+
+
+### Features
+
+* **server:** allow relationships to be optional ([616777c](https://github.com/DASPRiD/jsonapi-serde-js/commit/616777cb84d9d3bc6a581c83fda780752652cc09))
+
 ## [1.3.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.2.0...server-v1.3.0) (2025-08-24)
 
 
