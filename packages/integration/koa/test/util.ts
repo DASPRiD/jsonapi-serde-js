@@ -17,6 +17,7 @@ type BodyParserKoaContext<TState> = KoaContext<Partial<TState>> & {
     };
 };
 
+/* node:coverage disable */
 export const createKoaMockContext = <TState>(
     options?: KoaMockContextOptions<TState>,
 ): BodyParserKoaContext<Partial<TState>> => {
@@ -53,3 +54,4 @@ export const createKoaMockContext = <TState>(
 
     return context as BodyParserKoaContext<Partial<TState>>;
 };
+/* node:coverage enable */
