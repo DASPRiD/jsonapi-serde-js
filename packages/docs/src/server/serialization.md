@@ -244,6 +244,7 @@ app.get("/articles/:id", async (req, res) => {
 For convenience, this library provides framework-specific integrations that handle all of the above for you, including:
 
 - **Koa** middleware
+- **Taxum** middleware
 - More to come
 
 See the Integrations section for full details.

@@ -18,6 +18,7 @@ Detailed changes for each release are documented in the respective CHANGELOGs:
 - [@jsonapi-serde/server](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/server/CHANGELOG.md)
 - [@jsonapi-serde/openapi](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/openapi/CHANGELOG.md)
 - [@jsonapi-serde/integration-koa](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/integration/koa/CHANGELOG.md)
+- [@jsonapi-serde/integration-taxum](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/integration/taxum/CHANGELOG.md)
 - [@jsonapi-serde/client](https://github.com/dasprid/jsonapi-serde-js/blob/main/packages/client/CHANGELOG.md)
 
 ## License
