@@ -130,14 +130,10 @@ describe("body", () => {
             });
         });
 
-        it("includes all fields when all schemas are present", () => {
+        it('includes "meta" when metaSchema is provided', () => {
             const result = buildResourceRequestContentObject({
                 type: "book",
-                idSchema: z.string(),
-                attributesSchema: z.object({ title: z.string() }),
-                relationshipsSchema: z.object({
-                    author: z.object({ data: z.any() }),
-                }),
+                metaSchema: z.object({ foo: z.string() }),
             });
 
             assert.partialDeepStrictEqual(result, {
@@ -148,7 +144,44 @@ describe("body", () => {
                         properties: {
                             data: {
                                 type: "object",
-                                required: ["type", "id", "attributes", "relationships"],
+                                required: ["type", "meta"],
+                                properties: {
+                                    type: { type: "string", enum: ["book"] },
+                                    meta: {
+                                        type: "object",
+                                        properties: {
+                                            foo: { type: "string" },
+                                        },
+                                        required: ["foo"],
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        });
+
+        it("includes all fields when all schemas are present", () => {
+            const result = buildResourceRequestContentObject({
+                type: "book",
+                idSchema: z.string(),
+                attributesSchema: z.object({ title: z.string() }),
+                relationshipsSchema: z.object({
+                    author: z.object({ data: z.any() }),
+                }),
+                metaSchema: z.object({ foo: z.string() }),
+            });
+
+            assert.partialDeepStrictEqual(result, {
+                "application/vnd.api+json": {
+                    schema: {
+                        type: "object",
+                        required: ["data"],
+                        properties: {
+                            data: {
+                                type: "object",
+                                required: ["type", "id", "attributes", "relationships", "meta"],
                                 properties: {
                                     type: { type: "string", enum: ["book"] },
                                     id: { type: "string" },
@@ -171,6 +204,13 @@ describe("body", () => {
                                             },
                                         },
                                         required: ["author"],
+                                    },
+                                    meta: {
+                                        type: "object",
+                                        properties: {
+                                            foo: { type: "string" },
+                                        },
+                                        required: ["foo"],
                                     },
                                 },
                             },
@@ -251,7 +291,7 @@ describe("body", () => {
                                 items: {
                                     type: "object",
                                     properties: {
-                                        type: { type: "string", enum: ["user"] },
+                                        type: { const: "user" },
                                         id: { type: "string", example: "abc" },
                                     },
                                     required: ["id", "type"],

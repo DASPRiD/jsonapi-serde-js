@@ -6,6 +6,7 @@ import type {
     RelationshipsSchema,
 } from "@jsonapi-serde/server/request";
 import type { ContentObject, SchemaObject } from "openapi3-ts/oas31";
+import { z } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
 import { toJSONSchema } from "zod/v4/core";
 
@@ -22,43 +23,30 @@ export const buildResourceRequestContentObject = (
         IncludedTypeSchemas | undefined
     >,
 ): ContentObject => {
-    const resourceProperties: Record<string, SchemaObject> = {
-        type: { type: "string", enum: [options.type] },
+    const resourceShape: z.core.$ZodLooseShape = {
+        type: z.literal(options.type),
     };
-    const resourceRequired: string[] = ["type"];
 
     if (options.idSchema) {
-        resourceProperties.id = toJSONSchema(options.idSchema, { io: "input" }) as SchemaObject;
-        resourceRequired.push("id");
+        resourceShape.id = options.idSchema;
     }
 
     if (options.attributesSchema) {
-        resourceProperties.attributes = toJSONSchema(options.attributesSchema, {
-            io: "input",
-        }) as SchemaObject;
-        resourceRequired.push("attributes");
+        resourceShape.attributes = options.attributesSchema;
     }
 
     if (options.relationshipsSchema) {
-        resourceProperties.relationships = toJSONSchema(options.relationshipsSchema, {
-            io: "input",
-        }) as SchemaObject;
-        resourceRequired.push("relationships");
+        resourceShape.relationships = options.relationshipsSchema;
     }
 
     if (options.metaSchema) {
-        resourceProperties.relationships = toJSONSchema(options.metaSchema, {
-            io: "input",
-        }) as SchemaObject;
-        resourceRequired.push("meta");
+        resourceShape.meta = options.metaSchema;
     }
 
-    const resourceSchema: SchemaObject = {
-        type: "object",
-        properties: resourceProperties,
-        required: resourceRequired,
-        additionalProperties: false,
-    };
+    const resourceSchema = toJSONSchema(z.strictObject(resourceShape), {
+        io: "input",
+        target: "openapi-3.0",
+    }) as SchemaObject;
 
     const rootProperties: Record<string, SchemaObject> = {
         data: resourceSchema,
@@ -69,31 +57,23 @@ export const buildResourceRequestContentObject = (
             type: "array",
             items: {
                 oneOf: Object.entries(options.includedTypeSchemas).map(([type, options]) => {
-                    const properties: Record<string, SchemaObject> = {
-                        lid: { type: "string" },
-                        type: { type: "string", enum: [type] },
+                    const shape: z.core.$ZodLooseShape = {
+                        type: z.literal(type),
+                        lid: z.string(),
                     };
-                    const required: string[] = ["lid", "type"];
 
                     if (options.attributesSchema) {
-                        properties.attributes = toJSONSchema(options.attributesSchema, {
-                            io: "input",
-                        }) as SchemaObject;
-                        required.push("attributes");
+                        shape.attributes = options.attributesSchema;
                     }
 
                     if (options.relationshipsSchema) {
-                        properties.relationships = toJSONSchema(options.relationshipsSchema, {
-                            io: "input",
-                        }) as SchemaObject;
-                        required.push("relationships");
+                        shape.relationships = options.relationshipsSchema;
                     }
 
-                    return {
-                        type: "object",
-                        properties: properties,
-                        required: required,
-                    };
+                    return toJSONSchema(z.strictObject(shape), {
+                        io: "input",
+                        target: "openapi-3.0",
+                    }) as SchemaObject;
                 }),
             },
         };
@@ -126,9 +106,12 @@ export const buildRelationshipsRequestContentObject = (
                 items: {
                     type: "object",
                     properties: {
-                        type: { type: "string", enum: [type] },
+                        type: { const: type },
                         id: idSchema
-                            ? (toJSONSchema(idSchema, { io: "input" }) as SchemaObject)
+                            ? (toJSONSchema(idSchema, {
+                                  io: "input",
+                                  target: "openapi-3.0",
+                              }) as SchemaObject)
                             : { type: "string", example: "abc" },
                     },
                     required: ["id", "type"],
