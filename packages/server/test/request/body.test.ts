@@ -21,6 +21,7 @@ describe("request/body", () => {
         const relationshipsSchema = z.strictObject({
             friend: relationshipSchema(resourceIdentifierSchema("user")),
         });
+        const metaSchema = z.strictObject({ foo: z.string() });
 
         it("parses valid resource with attributes and relationships", () => {
             const body = {
@@ -45,6 +46,22 @@ describe("request/body", () => {
             assert.equal(result.type, "user");
             assert.deepEqual(result.attributes, { name: "Ada" });
             assert.deepEqual(result.relationships.friend.data.id, "2");
+        });
+
+        it("parses valid resource with meta", () => {
+            const body = {
+                data: {
+                    type: "user",
+                    meta: { foo: "bar" },
+                },
+            };
+
+            const result = parseResourceRequest(basicContext(body), {
+                type: "user",
+                metaSchema,
+            });
+
+            assert.equal(result.meta.foo, "bar");
         });
 
         it("throws on type mismatch", () => {
