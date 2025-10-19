@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.4.0...server-v1.5.0) (2025-10-19)
+
+
+### Features
+
+* add support for meta data in resource request ([3244c62](https://github.com/DASPRiD/jsonapi-serde-js/commit/3244c62fbe28156730f9f85e35f31fd4fc315331))
+
 ## [1.4.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.3.0...server-v1.4.0) (2025-10-11)
 
 

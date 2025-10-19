@@ -1,6 +1,6 @@
 {
     "name": "@jsonapi-serde/integration-taxum",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "description": "Taxum integration for @jsonapi-serde/server",
     "type": "module",
     "author": "Ben Scholzen 'DASPRiD'",

@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.3.1...openapi-v1.4.0) (2025-10-19)
+
+
+### Features
+
+* add support for meta data in resource request ([3244c62](https://github.com/DASPRiD/jsonapi-serde-js/commit/3244c62fbe28156730f9f85e35f31fd4fc315331))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.5.0
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.5.0
+
 ## [1.3.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.3.0...openapi-v1.3.1) (2025-10-11)
 
 
