@@ -113,6 +113,11 @@ export type RelationshipsSchema = $ZodType<
 export type AttributesSchema = $ZodType<Record<string, unknown>>;
 
 /**
+ * Zod schema for a generic JSON:API meta object
+ */
+export type MetaSchema = $ZodType<Record<string, unknown>>;
+
+/**
  * Configuration object for parsing a resource request
  *
  * Includes optional `idSchema`, `attributesSchema`, and `relationshipsSchema`, and an optional map of
@@ -123,6 +128,7 @@ export type ParseResourceRequestOptions<
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
+    TMetaSchema extends MetaSchema | undefined,
     TIncludedTypeSchemas extends IncludedTypeSchemas | undefined,
 > = {
     /** Optional Zod schema to validate the `id` field in the primary resource */
@@ -136,6 +142,9 @@ export type ParseResourceRequestOptions<
 
     /** Optional Zod schema for validating the `relationships` object in the request */
     relationshipsSchema?: TRelationshipsSchema;
+
+    /** Optional Zod schema for validating the `meta` object in the request */
+    metaSchema?: TMetaSchema;
 
     /**
      * Optional map of included resource `type` names to their validation schemas
@@ -221,6 +230,7 @@ export type ParseResourceRequestResult<
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
+    TMetaSchema extends MetaSchema | undefined,
     TIncludedTypeSchemas extends IncludedTypeSchemas | undefined,
 > = {
     id: TIdSchema extends $ZodType<string> ? z.output<TIdSchema> : undefined;
@@ -231,6 +241,7 @@ export type ParseResourceRequestResult<
     relationships: TRelationshipsSchema extends RelationshipsSchema
         ? z.output<TRelationshipsSchema>
         : undefined;
+    meta: TMetaSchema extends MetaSchema ? z.output<TMetaSchema> : undefined;
     includedTypes: TIncludedTypeSchemas extends IncludedTypeSchemas
         ? IncludedTypesContainer<TIncludedTypeSchemas>
         : undefined;
@@ -324,6 +335,7 @@ export const parseResourceRequest = <
     TType extends string,
     TAttributesSchema extends AttributesSchema | undefined,
     TRelationshipsSchema extends RelationshipsSchema | undefined,
+    TMetaSchema extends MetaSchema | undefined,
     TIncludedTypeSchemas extends IncludedTypeSchemas | undefined,
 >(
     context: BodyContext,
@@ -332,6 +344,7 @@ export const parseResourceRequest = <
         TType,
         TAttributesSchema,
         TRelationshipsSchema,
+        TMetaSchema,
         TIncludedTypeSchemas
     >,
 ): ParseResourceRequestResult<
@@ -339,6 +352,7 @@ export const parseResourceRequest = <
     NoInfer<TType>,
     NoInfer<TAttributesSchema>,
     NoInfer<TRelationshipsSchema>,
+    NoInfer<TMetaSchema>,
     NoInfer<TIncludedTypeSchemas>
 > => {
     const body = parseBody(context);
@@ -351,6 +365,7 @@ export const parseResourceRequest = <
                 type: fixedTypeSchema(options.type),
                 attributes: options.attributesSchema ?? z.undefined(),
                 relationships: options.relationshipsSchema ?? z.undefined(),
+                meta: options.metaSchema ?? z.undefined(),
             }),
             included: includedSchema,
         })
@@ -378,6 +393,10 @@ export const parseResourceRequest = <
         result.relationships = data.relationships;
     }
 
+    if ("meta" in data) {
+        result.meta = data.meta;
+    }
+
     if (options.includedTypeSchemas) {
         const includedTypes = Object.fromEntries(
             Object.keys(options.includedTypeSchemas).map((type) => [type, new Map()]),
@@ -403,6 +422,7 @@ export const parseResourceRequest = <
         TType,
         TAttributesSchema,
         TRelationshipsSchema,
+        TMetaSchema,
         TIncludedTypeSchemas
     >;
 };

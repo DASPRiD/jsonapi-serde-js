@@ -1,6 +1,7 @@
 import type {
     AttributesSchema,
     IncludedTypeSchemas,
+    MetaSchema,
     ParseResourceRequestOptions,
     RelationshipsSchema,
 } from "@jsonapi-serde/server/request";
@@ -17,6 +18,7 @@ export const buildResourceRequestContentObject = (
         string,
         AttributesSchema | undefined,
         RelationshipsSchema | undefined,
+        MetaSchema | undefined,
         IncludedTypeSchemas | undefined
     >,
 ): ContentObject => {
@@ -42,6 +44,13 @@ export const buildResourceRequestContentObject = (
             io: "input",
         }) as SchemaObject;
         resourceRequired.push("relationships");
+    }
+
+    if (options.metaSchema) {
+        resourceProperties.relationships = toJSONSchema(options.metaSchema, {
+            io: "input",
+        }) as SchemaObject;
+        resourceRequired.push("meta");
     }
 
     const resourceSchema: SchemaObject = {

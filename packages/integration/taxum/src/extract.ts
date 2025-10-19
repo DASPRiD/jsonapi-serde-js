@@ -4,6 +4,7 @@ import {
     type AttributesSchema,
     type BodyContext,
     type IncludedTypeSchemas,
+    type MetaSchema,
     type ParseQueryResult,
     type ParseResourceRequestOptions,
     type ParseResourceRequestResult,
@@ -54,6 +55,7 @@ export const jsonApiResource =
         TType extends string,
         TAttributesSchema extends AttributesSchema | undefined,
         TRelationshipsSchema extends RelationshipsSchema | undefined,
+        TMetaSchema extends MetaSchema | undefined,
         TIncludedTypeSchemas extends IncludedTypeSchemas | undefined,
     >(
         options: ParseResourceRequestOptions<
@@ -61,6 +63,7 @@ export const jsonApiResource =
             TType,
             TAttributesSchema,
             TRelationshipsSchema,
+            TMetaSchema,
             TIncludedTypeSchemas
         >,
         idPathParam?: string,
@@ -70,6 +73,7 @@ export const jsonApiResource =
             NoInfer<TType>,
             NoInfer<TAttributesSchema>,
             NoInfer<TRelationshipsSchema>,
+            NoInfer<TMetaSchema>,
             NoInfer<TIncludedTypeSchemas>
         >
     > =>
@@ -81,6 +85,7 @@ export const jsonApiResource =
             NoInfer<TType>,
             NoInfer<TAttributesSchema>,
             NoInfer<TRelationshipsSchema>,
+            NoInfer<TMetaSchema>,
             NoInfer<TIncludedTypeSchemas>
         >
     > => {
