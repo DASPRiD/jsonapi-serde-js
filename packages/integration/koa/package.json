@@ -42,7 +42,7 @@
         "@types/http-errors": "^2.0.5",
         "@types/koa": "^3.0.0",
         "http-errors": "^2.0.0",
-        "koa": "^3.0.1",
+        "koa": "^3.0.3",
         "koa-tree-router": "^0.13.1"
     },
     "peerDependencies": {
