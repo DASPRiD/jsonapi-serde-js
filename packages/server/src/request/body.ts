@@ -110,12 +110,12 @@ export type RelationshipsSchema = $ZodType<
 /**
  * Zod schema for a generic JSON:API attributes object
  */
-export type AttributesSchema = $ZodType<Record<string, unknown>>;
+export type AttributesSchema = $ZodType<Record<string, unknown> | undefined>;
 
 /**
  * Zod schema for a generic JSON:API meta object
  */
-export type MetaSchema = $ZodType<Record<string, unknown>>;
+export type MetaSchema = $ZodType<Record<string, unknown> | undefined>;
 
 /**
  * Configuration object for parsing a resource request
