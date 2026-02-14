@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.4.0...openapi-v1.4.1) (2026-02-14)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.5.1
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.5.1
+
 ## [1.4.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.3.1...openapi-v1.4.0) (2025-10-19)
 
 

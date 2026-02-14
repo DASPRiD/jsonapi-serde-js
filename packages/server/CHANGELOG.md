@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.5.0...server-v1.5.1) (2026-02-14)
+
+
+### Bug Fixes
+
+* **server:** allow attribute and meta schema in request body to be absent ([2c24f73](https://github.com/DASPRiD/jsonapi-serde-js/commit/2c24f73535465cc78a309bed1879555bc41d8fff))
+
 ## [1.5.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.4.0...server-v1.5.0) (2025-10-19)
 
 
