@@ -32,7 +32,7 @@ export type AttributesSchema = $ZodType<UnknownRecord>;
 /**
  * Schema for metadata at either the resource or document level
  */
-export type MetaSchema = $ZodType<UnknownRecord>;
+export type MetaSchema = $ZodType<UnknownRecord | undefined>;
 
 /**
  * Cardinality of the primary data or a relationship
