@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.1...client-v1.2.2) (2026-03-03)
+
+
+### Bug Fixes
+
+* **client:** allow meta schemas to be undefined ([54abcb1](https://github.com/DASPRiD/jsonapi-serde-js/commit/54abcb1db594749ae7e2e592fdff914deaadd6a9))
+
 ## [1.2.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.0...client-v1.2.1) (2025-10-11)
 
 
