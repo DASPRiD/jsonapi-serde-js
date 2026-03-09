@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.5.1...server-v1.6.0) (2026-03-09)
+
+
+### Features
+
+* **server:** add AnyParseResourceRequestOptions type ([a23d6e6](https://github.com/DASPRiD/jsonapi-serde-js/commit/a23d6e626f4b206c707b20476f5ad453d868b4bc))
+
 ## [1.5.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.5.0...server-v1.5.1) (2026-02-14)
 
 
