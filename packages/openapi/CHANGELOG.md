@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.4.2...openapi-v1.4.3) (2026-03-09)
+
+
+### Bug Fixes
+
+* **openapi:** export BuildDataResponseObjectOptions ([b519862](https://github.com/DASPRiD/jsonapi-serde-js/commit/b51986247535866d224098f97b4086df54ac872d))
+
 ## [1.4.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.4.1...openapi-v1.4.2) (2026-03-09)
 
 
