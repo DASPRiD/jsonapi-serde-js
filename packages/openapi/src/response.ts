@@ -116,7 +116,7 @@ export const buildResourceSchemaObject = (
     };
 };
 
-type BuildDataResponseObjectOptions = {
+export type BuildDataResponseObjectOptions = {
     resourceSchema: SchemaObject;
     cardinality: Cardinality;
     meta?: MetaSchemaObject;

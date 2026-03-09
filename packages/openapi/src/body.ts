@@ -1,10 +1,4 @@
-import type {
-    AttributesSchema,
-    IncludedTypeSchemas,
-    MetaSchema,
-    ParseResourceRequestOptions,
-    RelationshipsSchema,
-} from "@jsonapi-serde/server/request";
+import type { AnyParseResourceRequestOptions } from "@jsonapi-serde/server/request";
 import type { ContentObject, SchemaObject } from "openapi3-ts/oas31";
 import { z } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
@@ -14,14 +8,7 @@ import { toJSONSchema } from "zod/v4/core";
  * Generates an OpenAPI 3.1 content object for resource requests based on parser options
  */
 export const buildResourceRequestContentObject = (
-    options: ParseResourceRequestOptions<
-        $ZodType<string> | undefined,
-        string,
-        AttributesSchema | undefined,
-        RelationshipsSchema | undefined,
-        MetaSchema | undefined,
-        IncludedTypeSchemas | undefined
-    >,
+    options: AnyParseResourceRequestOptions,
 ): ContentObject => {
     const resourceShape: z.core.$ZodLooseShape = {
         type: z.literal(options.type),
