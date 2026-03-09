@@ -155,6 +155,20 @@ export type ParseResourceRequestOptions<
 };
 
 /**
+ * General type for `ParseResourceRequestOptions` that allows any schema type.
+ *
+ * Useful in `satisfies` calls.
+ */
+export type AnyParseResourceRequestOptions = ParseResourceRequestOptions<
+    $ZodType<string> | undefined,
+    string,
+    AttributesSchema | undefined,
+    RelationshipsSchema | undefined,
+    MetaSchema | undefined,
+    IncludedTypeSchemas | undefined
+>;
+
+/**
  * A parsed included resource entry
  */
 export type IncludedResource<TOptions extends AnyIncludedResourceSchemas> = {
