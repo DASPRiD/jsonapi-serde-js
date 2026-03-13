@@ -154,5 +154,22 @@ describe("query", () => {
             const result = buildQueryParameters({});
             assert.deepEqual(result, []);
         });
+
+        it("includes custom parameters as individual top-level parameters", () => {
+            const result = buildQueryParameters({
+                custom: z.object({
+                    locale: z.string(),
+                    draft: z.string().optional(),
+                }),
+            });
+
+            assert.equal(result.length, 2);
+            assert.equal(result[0].name, "locale");
+            assert.equal(result[0].in, "query");
+            assert.equal(result[0].required, true);
+            assert.equal(result[1].name, "draft");
+            assert.equal(result[1].in, "query");
+            assert.equal(result[1].required, undefined);
+        });
     });
 });

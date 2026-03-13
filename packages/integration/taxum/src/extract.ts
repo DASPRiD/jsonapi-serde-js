@@ -33,14 +33,15 @@ export const jsonApiQuery =
         TSparseFieldSets extends SparseFieldSets | undefined,
         TFilterSchema extends $ZodType | undefined,
         TPageSchema extends $ZodType | undefined,
+        TCustomSchema extends z.ZodObject<any> | undefined = undefined,
     >(
-        parse: QueryParser<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>,
+        parse: QueryParser<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>,
     ): Extractor<
-        ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>
+        ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>
     > =>
     (
         req: HttpRequest,
-    ): ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema> => {
+    ): ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema> => {
         return parse(req.uri.searchParams);
     };
 

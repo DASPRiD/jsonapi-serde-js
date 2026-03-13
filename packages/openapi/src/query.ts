@@ -1,5 +1,6 @@
 import type { ParseQueryOptions, SparseFieldSets } from "@jsonapi-serde/server/request";
 import type { ParameterObject, SchemaObject } from "openapi3-ts/oas31";
+import type { ZodObject } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
 import { toJSONSchema } from "zod/v4/core";
 
@@ -12,7 +13,8 @@ export const buildQueryParameters = (
         readonly string[] | undefined,
         SparseFieldSets | undefined,
         $ZodType | undefined,
-        $ZodType | undefined
+        $ZodType | undefined,
+        ZodObject<any> | undefined
     >,
 ): ParameterObject[] => {
     const parameters: ParameterObject[] = [];
@@ -111,6 +113,26 @@ export const buildQueryParameters = (
             }) as SchemaObject,
             required,
         });
+    }
+
+    if (options.custom) {
+        for (const [name, schema] of Object.entries(options.custom.shape) as [string, $ZodType][]) {
+            let required: true | undefined = true;
+
+            if (schema._zod.optin === "optional") {
+                required = undefined;
+            }
+
+            parameters.push({
+                name,
+                in: "query",
+                schema: toJSONSchema(schema, {
+                    io: "input",
+                    target: "openapi-3.0",
+                }) as SchemaObject,
+                required,
+            });
+        }
     }
 
     return parameters;
