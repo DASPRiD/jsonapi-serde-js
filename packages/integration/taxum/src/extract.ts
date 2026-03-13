@@ -19,7 +19,7 @@ import type { Extractor } from "@taxum/core/extract";
 import type { HttpRequest } from "@taxum/core/http";
 import { PATH_PARAMS } from "@taxum/core/routing";
 import { z } from "zod";
-import type { $ZodType } from "zod/v4/core";
+import type { $ZodShape, $ZodType } from "zod/v4/core";
 
 /**
  * Extractor which extracts query params based on a JSON:API query parser.
@@ -33,14 +33,36 @@ export const jsonApiQuery =
         TSparseFieldSets extends SparseFieldSets | undefined,
         TFilterSchema extends $ZodType | undefined,
         TPageSchema extends $ZodType | undefined,
+        TCustomSchema extends $ZodShape | undefined = undefined,
     >(
-        parse: QueryParser<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>,
+        parse: QueryParser<
+            TInclude,
+            TSortFields,
+            TSparseFieldSets,
+            TFilterSchema,
+            TPageSchema,
+            TCustomSchema
+        >,
     ): Extractor<
-        ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema>
+        ParseQueryResult<
+            TInclude,
+            TSortFields,
+            TSparseFieldSets,
+            TFilterSchema,
+            TPageSchema,
+            TCustomSchema
+        >
     > =>
     (
         req: HttpRequest,
-    ): ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema> => {
+    ): ParseQueryResult<
+        TInclude,
+        TSortFields,
+        TSparseFieldSets,
+        TFilterSchema,
+        TPageSchema,
+        TCustomSchema
+    > => {
         return parse(req.uri.searchParams);
     };
 

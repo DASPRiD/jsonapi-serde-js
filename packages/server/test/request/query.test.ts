@@ -151,6 +151,30 @@ describe("request/query", () => {
         const result = parseQuery("include=");
         assert.deepEqual(result.include, []);
     });
+
+    it("should parse custom query parameters", () => {
+        const parseQuery = createQueryParser({
+            custom: { locale: z.string(), draft: z.enum(["true", "false"]).optional() },
+        });
+        const result = parseQuery("locale=en&draft=true");
+        assert.equal(result.locale, "en");
+        assert.equal(result.draft, "true");
+    });
+
+    it("should validate custom query parameters with zod", () => {
+        const parseQuery = createQueryParser({
+            custom: { locale: z.string() },
+        });
+        assert.throws(
+            () => {
+                parseQuery("unexpected=foo");
+            },
+            (error) => {
+                assert(error instanceof ZodValidationError);
+                return true;
+            },
+        );
+    });
 });
 
 const _typeTests = () => {
@@ -228,4 +252,17 @@ const _typeTests = () => {
             },
         },
     });
+
+    const withCustom = createQueryParser({
+        custom: { locale: z.string(), draft: z.enum(["true", "false"]).optional() },
+    });
+    expectTypeOf<ReturnType<typeof withCustom>>().branded.toEqualTypeOf<{
+        include: undefined;
+        sort: undefined;
+        fields: undefined;
+        filter: undefined;
+        page: undefined;
+        locale: string;
+        draft?: "true" | "false";
+    }>();
 };
