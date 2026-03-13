@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.3.2...integration-taxum-v1.4.0) (2026-03-13)
+
+
+### Features
+
+* add TCustomSchema support to createQueryParser for custom top-level query params ([#48](https://github.com/DASPRiD/jsonapi-serde-js/issues/48)) ([40d65c0](https://github.com/DASPRiD/jsonapi-serde-js/commit/40d65c0c96fb41db1c7211130b11846c84327de1))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.7.0
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.7.0
+
 ## [1.3.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.3.1...integration-taxum-v1.3.2) (2026-03-09)
 
 
