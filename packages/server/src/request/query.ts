@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import type { $ZodType } from "zod/v4/core";
+import type { $InferObjectOutput, $ZodShape, $ZodType } from "zod/v4/core";
 import { ZodValidationError, ZodValidationErrorParams } from "../common/error.js";
 import type { ParentPaths } from "../common/utils.js";
 import { parseSearchParams, type SearchParamsInput } from "../http/index.js";
@@ -85,7 +85,7 @@ export type ParseQueryOptions<
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
-    TCustomSchema extends z.ZodObject<any> | undefined = undefined,
+    TCustomSchema extends $ZodShape | undefined = undefined,
 > = {
     /** Configuration for `include` query param */
     include?: ParseQueryIncludeOptions<TInclude>;
@@ -103,9 +103,9 @@ export type ParseQueryOptions<
     page?: TPageSchema;
 
     /**
-     * Zod object schema for validating custom (non-JSON:API-reserved) query params.
+     * Zod shape for validating custom (non-JSON:API-reserved) query params.
      *
-     * Each key of the object corresponds to a top-level query parameter (e.g. `?foo=bar`).
+     * Each key of the shape corresponds to a top-level query parameter (e.g. `?foo=bar`).
      * The parsed values are merged directly into the query result.
      *
      * Note: it is the caller's responsibility to not use JSON:API reserved parameter names.
@@ -124,7 +124,7 @@ export type ParseQueryResult<
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
-    TCustomSchema extends z.ZodObject<any> | undefined = undefined,
+    TCustomSchema extends $ZodShape | undefined = undefined,
 > = {
     include: undefined extends TInclude
         ? undefined
@@ -143,7 +143,7 @@ export type ParseQueryResult<
           : undefined;
     filter: TFilterSchema extends $ZodType ? z.output<TFilterSchema> : undefined;
     page: TPageSchema extends $ZodType ? z.output<TPageSchema> : undefined;
-} & (TCustomSchema extends z.ZodObject<any> ? z.output<TCustomSchema> : unknown);
+} & (TCustomSchema extends $ZodShape ? $InferObjectOutput<TCustomSchema, Record<never, never>> : unknown);
 
 /**
  * Builds a schema to validate and transform the `include` parameter
@@ -280,7 +280,7 @@ export type QueryParser<
     TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
-    TCustomSchema extends z.ZodObject<any> | undefined = undefined,
+    TCustomSchema extends $ZodShape | undefined = undefined,
 > = (
     searchParams: SearchParamsInput,
 ) => ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>;
@@ -312,7 +312,7 @@ export const createQueryParser = <
     const TSparseFieldSets extends SparseFieldSets | undefined,
     TFilterSchema extends $ZodType | undefined,
     TPageSchema extends $ZodType | undefined,
-    TCustomSchema extends z.ZodObject<any> | undefined = undefined,
+    const TCustomSchema extends $ZodShape | undefined = undefined,
 >(
     options: ParseQueryOptions<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>,
 ): QueryParser<
@@ -343,7 +343,7 @@ export const createQueryParser = <
             : z.undefined({ error: "'page' parameter is not supported" }),
     });
 
-    const schema = options.custom ? baseSchema.extend(options.custom.shape) : baseSchema;
+    const schema = options.custom ? baseSchema.extend(options.custom) : baseSchema;
 
     return (input: SearchParamsInput) => {
         const parseResult = schema.safeParse(parseSearchParams(input));

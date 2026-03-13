@@ -154,7 +154,7 @@ describe("request/query", () => {
 
     it("should parse custom query parameters", () => {
         const parseQuery = createQueryParser({
-            custom: z.object({ locale: z.string(), draft: z.enum(["true", "false"]).optional() }),
+            custom: { locale: z.string(), draft: z.enum(["true", "false"]).optional() },
         });
         const result = parseQuery("locale=en&draft=true");
         assert.equal(result.locale, "en");
@@ -163,7 +163,7 @@ describe("request/query", () => {
 
     it("should validate custom query parameters with zod", () => {
         const parseQuery = createQueryParser({
-            custom: z.object({ locale: z.string() }),
+            custom: { locale: z.string() },
         });
         assert.throws(
             () => {
@@ -254,7 +254,7 @@ const _typeTests = () => {
     });
 
     const withCustom = createQueryParser({
-        custom: z.object({ locale: z.string(), draft: z.enum(["true", "false"]).optional() }),
+        custom: { locale: z.string(), draft: z.enum(["true", "false"]).optional() },
     });
     expectTypeOf<ReturnType<typeof withCustom>>().branded.toEqualTypeOf<{
         include: undefined;
@@ -263,6 +263,6 @@ const _typeTests = () => {
         filter: undefined;
         page: undefined;
         locale: string;
-        draft: "true" | "false" | undefined;
+        draft?: "true" | "false";
     }>();
 };

@@ -157,10 +157,10 @@ describe("query", () => {
 
         it("includes custom parameters as individual top-level parameters", () => {
             const result = buildQueryParameters({
-                custom: z.object({
+                custom: {
                     locale: z.string(),
                     draft: z.string().optional(),
-                }),
+                },
             });
 
             assert.equal(result.length, 2);
