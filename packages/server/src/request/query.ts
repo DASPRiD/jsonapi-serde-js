@@ -143,7 +143,9 @@ export type ParseQueryResult<
           : undefined;
     filter: TFilterSchema extends $ZodType ? z.output<TFilterSchema> : undefined;
     page: TPageSchema extends $ZodType ? z.output<TPageSchema> : undefined;
-} & (TCustomSchema extends $ZodShape ? $InferObjectOutput<TCustomSchema, Record<never, never>> : unknown);
+} & (TCustomSchema extends $ZodShape
+    ? $InferObjectOutput<TCustomSchema, Record<never, never>>
+    : unknown);
 
 /**
  * Builds a schema to validate and transform the `include` parameter
@@ -283,7 +285,14 @@ export type QueryParser<
     TCustomSchema extends $ZodShape | undefined = undefined,
 > = (
     searchParams: SearchParamsInput,
-) => ParseQueryResult<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>;
+) => ParseQueryResult<
+    TInclude,
+    TSortFields,
+    TSparseFieldSets,
+    TFilterSchema,
+    TPageSchema,
+    TCustomSchema
+>;
 
 /**
  * Creates a query parser for JSON:API-compliant query strings.
@@ -314,7 +323,14 @@ export const createQueryParser = <
     TPageSchema extends $ZodType | undefined,
     const TCustomSchema extends $ZodShape | undefined = undefined,
 >(
-    options: ParseQueryOptions<TInclude, TSortFields, TSparseFieldSets, TFilterSchema, TPageSchema, TCustomSchema>,
+    options: ParseQueryOptions<
+        TInclude,
+        TSortFields,
+        TSparseFieldSets,
+        TFilterSchema,
+        TPageSchema,
+        TCustomSchema
+    >,
 ): QueryParser<
     NoInfer<TInclude>,
     NoInfer<TSortFields>,
