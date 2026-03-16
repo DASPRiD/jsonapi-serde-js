@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.7.0...server-v1.8.0) (2026-03-16)
+
+
+### Features
+
+* **server:** add AnyParseQueryOptions ([000aad1](https://github.com/DASPRiD/jsonapi-serde-js/commit/000aad16426a329d5e415f77128c0d2f95cd72da))
+
 ## [1.7.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.6.0...server-v1.7.0) (2026-03-13)
 
 
