@@ -114,6 +114,20 @@ export type ParseQueryOptions<
 };
 
 /**
+ * General type for `ParseQueryOptions` that allows any schema type.
+ *
+ * Useful in `satisfies` calls.
+ */
+export type AnyParseQueryOptions = ParseQueryOptions<
+    readonly string[] | undefined,
+    readonly string[] | undefined,
+    SparseFieldSets | undefined,
+    $ZodType | undefined,
+    $ZodType | undefined,
+    $ZodShape | undefined
+>;
+
+/**
  * Structured result returned by the query parser.
  *
  * When `TCustomSchema` is provided, its output fields are merged at the top level of the result.
