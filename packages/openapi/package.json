@@ -17,7 +17,7 @@
     },
     "scripts": {
         "build": "tsc -p tsconfig.build.json",
-        "test": "tsx --test --test-reporter=spec",
+        "test": "tsx -C jsonapi-serde --test --test-reporter=spec",
         "typecheck": "tsc --noEmit",
         "ci:test": "c8 --reporter=lcov pnpm test"
     },

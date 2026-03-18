@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { relationshipSchema, resourceIdentifierSchema } from "@jsonapi-serde/server/request";
 import { z } from "zod/v4";
 import {
     buildRelationshipsRequestContentObject,
@@ -94,7 +95,7 @@ describe("body", () => {
             const result = buildResourceRequestContentObject({
                 type: "book",
                 relationshipsSchema: z.object({
-                    author: z.object({ data: z.any() }),
+                    author: relationshipSchema(resourceIdentifierSchema("person")),
                 }),
             });
 
@@ -115,7 +116,16 @@ describe("body", () => {
                                             author: {
                                                 type: "object",
                                                 properties: {
-                                                    data: {},
+                                                    data: {
+                                                        type: "object",
+                                                        properties: {
+                                                            type: {
+                                                                type: "string",
+                                                                const: "person",
+                                                            },
+                                                        },
+                                                        required: ["type", "id"],
+                                                    },
                                                 },
                                                 required: ["data"],
                                             },

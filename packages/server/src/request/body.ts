@@ -18,36 +18,39 @@ export type BodyContext = {
  * Creates a Zod schema that ensures a string equals the provided fixed type
  */
 const fixedTypeSchema = <TType extends string>(type: TType) =>
-    z.string().check((context) => {
-        if (context.value !== type) {
-            context.issues.push({
-                code: "custom",
-                message: "Type mismatch",
-                params: new ZodValidationErrorParams(
-                    "type_mismatch",
-                    `Type '${context.value}' does not match '${type}'`,
-                    409,
-                ),
-                input: context.value,
-            });
-        }
-    }) as unknown as $ZodType<TType>;
+    z
+        .string()
+        .check((context) => {
+            if (context.value !== type) {
+                context.issues.push({
+                    code: "custom",
+                    message: "Type mismatch",
+                    params: new ZodValidationErrorParams(
+                        "type_mismatch",
+                        `Type '${context.value}' does not match '${type}'`,
+                        409,
+                    ),
+                    input: context.value,
+                });
+            }
+        })
+        .meta({ const: type }) as unknown as $ZodType<TType>;
 
 /**
  * Zod schema for a resource identifier with a required `type` and `id`
  */
-export type ResourceIdentifierSchema<TType extends string> = $ZodType<{
+export type ResourceIdentifierSchema<TType extends string, TId extends string = string> = $ZodType<{
     type: TType;
-    id: string;
+    id: TId;
 }>;
 
 /**
  * Constructs a Zod schema for a JSON:API resource identifier
  */
-export const resourceIdentifierSchema = <TType extends string>(
+export const resourceIdentifierSchema = <TType extends string, TId extends string = string>(
     type: TType,
-    idSchema: $ZodType<string> = z.string(),
-): ResourceIdentifierSchema<TType> =>
+    idSchema: $ZodType<TId> = z.string() as unknown as $ZodType<TId>,
+): ResourceIdentifierSchema<TType, TId> =>
     z.strictObject({
         type: fixedTypeSchema(type),
         id: idSchema,
