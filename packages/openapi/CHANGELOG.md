@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.6.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.5.1...openapi-v1.6.0) (2026-03-18)
+
+
+### Features
+
+* **server:** preserve custom identifier ID and expose type meta in fixedTypeSchema ([2f6479b](https://github.com/DASPRiD/jsonapi-serde-js/commit/2f6479bfaa9a2e2743d2da2597ae1709897e1528))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.9.0
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.9.0
+
 ## [1.5.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.5.0...openapi-v1.5.1) (2026-03-16)
 
 

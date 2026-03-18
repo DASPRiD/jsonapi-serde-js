@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.8.0...server-v1.9.0) (2026-03-18)
+
+
+### Features
+
+* **server:** preserve custom identifier ID and expose type meta in fixedTypeSchema ([2f6479b](https://github.com/DASPRiD/jsonapi-serde-js/commit/2f6479bfaa9a2e2743d2da2597ae1709897e1528))
+
 ## [1.8.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.7.0...server-v1.8.0) (2026-03-16)
 
 
