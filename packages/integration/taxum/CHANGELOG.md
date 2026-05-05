@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.2...integration-taxum-v1.4.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **server:** accept missing optional fields under zod &gt;=4.4 ([b35c174](https://github.com/DASPRiD/jsonapi-serde-js/commit/b35c174a4a276f79aea7a2bb455ddb9c4a3e526e))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.9.1
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.9.1
+
 ## [1.4.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.1...integration-taxum-v1.4.2) (2026-03-18)
 
 
