@@ -77,65 +77,33 @@ export const buildQueryParameters = (
     }
 
     if (options.filter) {
-        let required: true | undefined = true;
-
-        if (options.filter._zod.optin === "optional") {
-            required = undefined;
-        }
-
-        parameters.push({
-            name: "filter",
-            in: "query",
-            style: "deepObject",
-            schema: toJSONSchema(options.filter, {
-                io: "input",
-                target: "openapi-3.0",
-            }) as SchemaObject,
-            required,
-        });
+        parameters.push(buildSchemaParameter("filter", options.filter, "deepObject"));
     }
 
     if (options.page) {
-        let required: true | undefined = true;
-
-        if (options.page._zod.optin === "optional") {
-            required = undefined;
-        }
-
-        parameters.push({
-            name: "page",
-            in: "query",
-            style: "deepObject",
-            schema: toJSONSchema(options.page, {
-                io: "input",
-                target: "openapi-3.0",
-            }) as SchemaObject,
-            required,
-        });
+        parameters.push(buildSchemaParameter("page", options.page, "deepObject"));
     }
 
     if (options.custom) {
         for (const [name, schema] of Object.entries(options.custom) as [string, $ZodType][]) {
-            let required: true | undefined = true;
-
-            if (schema._zod.optin === "optional") {
-                required = undefined;
-            }
-
-            parameters.push({
-                name,
-                in: "query",
-                schema: toJSONSchema(schema, {
-                    io: "input",
-                    target: "openapi-3.0",
-                }) as SchemaObject,
-                required,
-            });
+            parameters.push(buildSchemaParameter(name, schema));
         }
     }
 
     return parameters;
 };
+
+const buildSchemaParameter = (
+    name: string,
+    schema: $ZodType,
+    style?: ParameterObject["style"],
+): ParameterObject => ({
+    name,
+    in: "query",
+    ...(style ? { style } : {}),
+    schema: toJSONSchema(schema, { io: "input", target: "openapi-3.0" }) as SchemaObject,
+    required: schema._zod.optin === "optional" ? undefined : true,
+});
 
 const expandDotNotation = (input: string): string[] => {
     const parts = input.split(".");

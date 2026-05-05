@@ -126,5 +126,6 @@
  * -------------------------------------------------------------------------- */
 
 .DocSearch {
+    /* biome-ignore lint/complexity/noImportantStyles: needed to override DocSearch's own theme variables */
     --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
