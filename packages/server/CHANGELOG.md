@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.9.0...server-v1.9.1) (2026-05-05)
+
+
+### Bug Fixes
+
+* **server:** accept missing optional fields under zod &gt;=4.4 ([b35c174](https://github.com/DASPRiD/jsonapi-serde-js/commit/b35c174a4a276f79aea7a2bb455ddb9c4a3e526e))
+
 ## [1.9.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.8.0...server-v1.9.0) (2026-03-18)
 
 
