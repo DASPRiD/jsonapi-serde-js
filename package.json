@@ -19,7 +19,6 @@
         "url": "https://github.com/DASPRiD/jsonapi-serde-js.git"
     },
     "scripts": {
-        "build": "pnpm -r build",
         "test": "FORCE_COLOR=1 pnpm --parallel --no-sort test",
         "typecheck": "pnpm --parallel typecheck",
         "ci:test": "pnpm --parallel --no-sort --no-bail ci:test",
