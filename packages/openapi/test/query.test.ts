@@ -37,7 +37,7 @@ describe("query", () => {
             });
 
             assert.deepEqual(result[0], {
-                name: "include",
+                name: "sort",
                 in: "query",
                 schema: {
                     type: "array",
@@ -61,7 +61,7 @@ describe("query", () => {
             });
 
             assert.deepEqual(result[0], {
-                name: "include",
+                name: "sort",
                 in: "query",
                 schema: {
                     type: "array",

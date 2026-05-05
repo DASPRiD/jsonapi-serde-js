@@ -35,7 +35,7 @@ export const buildQueryParameters = (
 
     if (options.sort?.allowed) {
         parameters.push({
-            name: "include",
+            name: "sort",
             in: "query",
             schema: {
                 type: "array",
