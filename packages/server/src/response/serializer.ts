@@ -62,20 +62,20 @@ export type EntitySerializer<
 /**
  * Infers the entity type from an EntitySerializer
  */
-export type InferEntity<T extends EntitySerializer<object>> = T extends EntitySerializer<infer U>
-    ? U
-    : never;
+export type InferEntity<T extends EntitySerializer<object>> =
+    T extends EntitySerializer<infer U> ? U : never;
 
 /**
  * Infers the context type from an EntitySerializer
  */
-export type InferContext<T extends EntitySerializer<object>> = T extends EntitySerializer<
-    // biome-ignore lint/suspicious/noExplicitAny: Required for inference
-    any,
-    infer U
->
-    ? U
-    : never;
+export type InferContext<T extends EntitySerializer<object>> =
+    T extends EntitySerializer<
+        // biome-ignore lint/suspicious/noExplicitAny: Required for inference
+        any,
+        infer U
+    >
+        ? U
+        : never;
 
 /**
  * A generic serializer type used for mapping any entity
@@ -155,9 +155,8 @@ export type Serializer<TMap extends SerializeMap> = <TType extends keyof TMap & 
 /**
  * Infers the serialize map from a serializer
  */
-export type InferSerializeMap<T extends Serializer<SerializeMap>> = T extends Serializer<infer U>
-    ? U
-    : never;
+export type InferSerializeMap<T extends Serializer<SerializeMap>> =
+    T extends Serializer<infer U> ? U : never;
 
 /**
  * Infers the serialize entity from a serializer

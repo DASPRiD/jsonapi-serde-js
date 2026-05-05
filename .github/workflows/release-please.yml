@@ -19,13 +19,13 @@ jobs:
       any_release_created: ${{ steps.check_release.outputs.any_release_created }}
 
     steps:
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v3
         id: app-token
         with:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
 
-      - uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
           token: ${{ steps.app-token.outputs.token }}
@@ -33,7 +33,7 @@ jobs:
 
       - name: Check if any package released
         id: check_release
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           PATHS_RELEASED: ${{ steps.release.outputs.paths_released }}
         with:
@@ -48,13 +48,13 @@ jobs:
     if: needs.release-please.outputs.any_release_created == 'true'
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Use pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v6
 
       - name: Use Node.js 24.x
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           registry-url: 'https://registry.npmjs.org'
