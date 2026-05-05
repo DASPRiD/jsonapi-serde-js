@@ -2,6 +2,6 @@ sideEffectsCache: false
 packages:
   - packages/*
   - packages/integration/*
-onlyBuiltDependencies:
-  - esbuild
-  - lefthook
+allowBuilds:
+  esbuild: true
+  lefthook: true
