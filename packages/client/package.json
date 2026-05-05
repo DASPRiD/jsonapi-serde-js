@@ -39,7 +39,7 @@
     "devDependencies": {
         "@types/node": "^24.7.2",
         "expect-type": "^1.2.2",
-        "zod": "^4.1.12"
+        "zod": "^4.4.3"
     },
     "peerDependencies": {
         "zod": "^3.25.42 || ^4.0.0"

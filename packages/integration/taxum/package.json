@@ -49,7 +49,7 @@
         "@jsonapi-serde/server": "workspace:^",
         "@standard-schema/spec": "^1.0.0",
         "@taxum/core": "^1.0.0",
-        "zod": "^4.1.8"
+        "zod": "^4.4.3"
     },
     "peerDependencies": {
         "@jsonapi-serde/server": "workspace:^",

@@ -45,8 +45,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       zod:
-        specifier: ^4.1.12
-        version: 4.1.12
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/docs:
     devDependencies:
@@ -93,8 +93,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       zod:
-        specifier: ^4.1.8
-        version: 4.1.8
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/openapi:
     devDependencies:
@@ -105,8 +105,8 @@ importers:
         specifier: ^4.5.0
         version: 4.5.0
       zod:
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/server:
     devDependencies:
@@ -114,8 +114,8 @@ importers:
         specifier: ^1.2.2
         version: 1.2.2
       zod:
-        specifier: ^4.1.1
-        version: 4.1.1
+        specifier: ^4.4.3
+        version: 4.4.3
 
 packages:
 
@@ -1188,6 +1188,7 @@ packages:
   git-raw-commits@4.0.0:
     resolution: {integrity: sha512-ICsMM1Wk8xSGMowkOmPrzo2Fgmfo4bMHLNX6ytHjajRJUqvHOw/TFapQ+QG75c3X/tTDDhOSRPGC52dDbNM8FQ==}
     engines: {node: '>=16'}
+    deprecated: This package is no longer maintained. For the JavaScript API, please use @conventional-changelog/git-client instead.
     hasBin: true
 
   glob@10.4.5:
@@ -1944,14 +1945,8 @@ packages:
     resolution: {integrity: sha512-AyeEbWOu/TAXdxlV9wmGcR0+yh2j3vYPGOECcIj2S7MkrLyC7ne+oye2BKTItt0ii2PHk4cDy+95+LshzbXnGg==}
     engines: {node: '>=12.20'}
 
-  zod@4.1.1:
-    resolution: {integrity: sha512-SgMZK/h8Tigt9nnKkfJMvB/mKjiJXaX26xegP4sa+0wHIFVFWVlsQGdhklDmuargBD3Hsi3rsQRIzwJIhTPJHA==}
-
-  zod@4.1.12:
-    resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
-
-  zod@4.1.8:
-    resolution: {integrity: sha512-5R1P+WwQqmmMIEACyzSvo4JXHY5WiAFHRMg+zBZKgKS+Q1viRa0C1hmUKtHltoIFKtIdki3pRxkmpP74jnNYHQ==}
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -3783,10 +3778,6 @@ snapshots:
 
   yocto-queue@1.2.1: {}
 
-  zod@4.1.1: {}
-
-  zod@4.1.12: {}
-
-  zod@4.1.8: {}
+  zod@4.4.3: {}
 
   zwitch@2.0.4: {}

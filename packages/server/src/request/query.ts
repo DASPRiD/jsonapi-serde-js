@@ -356,21 +356,21 @@ export const createQueryParser = <
     const baseSchema = z.strictObject({
         include: options.include?.allowed
             ? buildIncludeSchema(options.include as ParseQueryIncludeOptions<readonly string[]>)
-            : z.undefined({ error: "'include' parameter is not supported" }),
+            : z.undefined({ error: "'include' parameter is not supported" }).optional(),
         sort: options.sort?.allowed
             ? buildSortSchema(options.sort as ParseQuerySortOptions<readonly string[]>)
-            : z.undefined({ error: "'sort' parameter is not supported" }),
+            : z.undefined({ error: "'sort' parameter is not supported" }).optional(),
         fields: options.fields?.allowed
             ? buildSparseFieldsetSchema(
                   options.fields as ParseQuerySparseFieldsetOptions<SparseFieldSets>,
               )
-            : z.undefined({ error: "'fields' parameter is not supported" }),
+            : z.undefined({ error: "'fields' parameter is not supported" }).optional(),
         filter: options.filter
             ? options.filter
-            : z.undefined({ error: "'filter' parameter is not supported" }),
+            : z.undefined({ error: "'filter' parameter is not supported" }).optional(),
         page: options.page
             ? options.page
-            : z.undefined({ error: "'page' parameter is not supported" }),
+            : z.undefined({ error: "'page' parameter is not supported" }).optional(),
     });
 
     const schema = options.custom ? baseSchema.extend(options.custom) : baseSchema;

@@ -303,7 +303,7 @@ const buildIncludedSchema = <TIncludedTypeSchemas extends IncludedTypeSchemas | 
     includedTypes: TIncludedTypeSchemas,
 ): IncludedSchema => {
     if (!includedTypes) {
-        return z.undefined();
+        return z.undefined().optional();
     }
 
     const includedResourceSchemas: IncludedResourceSchema[] = [];
@@ -313,10 +313,12 @@ const buildIncludedSchema = <TIncludedTypeSchemas extends IncludedTypeSchemas | 
             z.object({
                 lid: z.string(),
                 type: z.literal(type),
-                attributes: schemas.attributesSchema ? schemas.attributesSchema : z.undefined(),
+                attributes: schemas.attributesSchema
+                    ? schemas.attributesSchema
+                    : z.undefined().optional(),
                 relationships: schemas.relationshipsSchema
                     ? schemas.relationshipsSchema
-                    : z.undefined(),
+                    : z.undefined().optional(),
             }),
         );
     }
@@ -378,11 +380,11 @@ export const parseResourceRequest = <
     const parseResult = z
         .strictObject({
             data: z.strictObject({
-                id: options.idSchema ?? z.undefined(),
+                id: options.idSchema ?? z.undefined().optional(),
                 type: fixedTypeSchema(options.type),
-                attributes: options.attributesSchema ?? z.undefined(),
-                relationships: options.relationshipsSchema ?? z.undefined(),
-                meta: options.metaSchema ?? z.undefined(),
+                attributes: options.attributesSchema ?? z.undefined().optional(),
+                relationships: options.relationshipsSchema ?? z.undefined().optional(),
+                meta: options.metaSchema ?? z.undefined().optional(),
             }),
             included: includedSchema,
         })
