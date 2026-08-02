@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.9.1...server-v1.10.0) (2026-08-02)
+
+
+### Features
+
+* **server:** allow undefined members in RelationshipsSchema ([c1d8533](https://github.com/DASPRiD/jsonapi-serde-js/commit/c1d8533884d43d8d0423337881bd89bf626fe48c))
+
 ## [1.9.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.9.0...server-v1.9.1) (2026-05-05)
 
 
