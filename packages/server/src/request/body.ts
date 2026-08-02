@@ -105,9 +105,12 @@ export const relationshipSchema = <TDataSchema extends RelationshipDataSchema>(
 
 /**
  * Zod schema for a map of named relationships
+ *
+ * Members may be undefined so that object schemas with optional relationship
+ * keys, e.g. built dynamically per tenant, satisfy this bound.
  */
 export type RelationshipsSchema = $ZodType<
-    Record<string, z.output<RelationshipSchema<RelationshipDataSchema>>> | undefined
+    Record<string, z.output<RelationshipSchema<RelationshipDataSchema>> | undefined> | undefined
 >;
 
 /**
