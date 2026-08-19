@@ -37,6 +37,7 @@ describe("error-handler", () => {
                 assert.fail("Expected JsonApiError was not thrown");
             } catch (err) {
                 assert(err instanceof JsonApiError);
+                assert.equal(err.name, "JsonApiError");
                 assert.equal(err.status, 404);
                 assert.deepEqual(err.errors, validErrorDocument.errors);
                 assert.deepEqual(err.meta, validErrorDocument.meta);

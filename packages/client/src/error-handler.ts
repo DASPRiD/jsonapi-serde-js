@@ -59,6 +59,7 @@ export class JsonApiError extends Error {
     public constructor(message: string, status: number, errors: ErrorObject[], meta?: UnknownMeta) {
         super(message);
 
+        this.name = "JsonApiError";
         this.status = status;
         this.errors = errors;
         this.meta = meta;
