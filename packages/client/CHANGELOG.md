@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.3...client-v1.2.4) (2026-08-19)
+
+
+### Bug Fixes
+
+* **client:** report JsonApiError under its own name ([6a853dd](https://github.com/DASPRiD/jsonapi-serde-js/commit/6a853ddb8843f054db29645dd4611d0a121c9da6))
+
 ## [1.2.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.2...client-v1.2.3) (2026-05-05)
 
 

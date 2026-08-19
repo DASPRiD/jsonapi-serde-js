@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.10.0...server-v1.10.1) (2026-08-19)
+
+
+### Bug Fixes
+
+* **server:** report MediaTypeParserError under its own name ([3c9aabd](https://github.com/DASPRiD/jsonapi-serde-js/commit/3c9aabd2c7ec191c71f760e9d9d34405fb8c64b6))
+
 ## [1.10.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.9.1...server-v1.10.0) (2026-08-02)
 
 
