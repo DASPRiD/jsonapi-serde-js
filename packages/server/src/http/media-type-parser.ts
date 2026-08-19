@@ -1,7 +1,13 @@
 /**
  * Thrown when parsing the header fails due to invalid syntax or unexpected characters
  */
-export class MediaTypeParserError extends Error {}
+export class MediaTypeParserError extends Error {
+    public constructor(message: string, options?: ErrorOptions) {
+        super(message, options);
+
+        this.name = "MediaTypeParserError";
+    }
+}
 
 /**
  * Parsed representation of a single media type
