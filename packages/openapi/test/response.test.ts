@@ -179,6 +179,39 @@ describe("response", () => {
             });
         });
 
+        it("omits an optional relationship from the required list", () => {
+            const result = buildResourceSchemaObject({
+                type: "post",
+                relationships: [
+                    { name: "author", type: "person", cardinality: "one" },
+                    { name: "comments", type: "comment", cardinality: "many", optional: true },
+                ],
+            });
+
+            // Exactly, not partially: a subset match would accept the
+            // optional relationship being listed alongside the required one.
+            assert.deepEqual((result.properties?.relationships as SchemaObject).required, [
+                "author",
+            ]);
+            assert.ok(result.required?.includes("relationships"));
+            assert.ok(
+                "comments" in ((result.properties?.relationships as SchemaObject).properties ?? {}),
+            );
+        });
+
+        it("requires neither the member nor any name when all are optional", () => {
+            const result = buildResourceSchemaObject({
+                type: "post",
+                relationships: [
+                    { name: "comments", type: "comment", cardinality: "many", optional: true },
+                    { name: "tags", type: "tag", cardinality: "many", optional: true },
+                ],
+            });
+
+            assert.equal((result.properties?.relationships as SchemaObject).required, undefined);
+            assert.deepEqual(result.required, ["id", "type"]);
+        });
+
         it("uses provided idSchema in relationship when given", () => {
             const result = buildResourceSchemaObject({
                 type: "book",

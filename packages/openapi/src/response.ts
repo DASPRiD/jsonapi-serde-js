@@ -7,6 +7,7 @@ export type RelationshipDefinition = {
     type: string;
     id?: SchemaObject;
     cardinality: Cardinality;
+    optional?: boolean;
 };
 
 export type MetaSchemaObject = SchemaObject & { type: "object" };
@@ -68,6 +69,10 @@ export const buildResourceSchemaObject = (
     }
 
     if (options.relationships) {
+        const alwaysServed = options.relationships
+            .filter((relationship) => !relationship.optional)
+            .map((relationship) => relationship.name);
+
         properties.relationships = {
             type: "object",
             properties: Object.fromEntries(
@@ -92,9 +97,12 @@ export const buildResourceSchemaObject = (
                     return [relationship.name, schemaObject];
                 }),
             ),
-            required: options.relationships.map((relationship) => relationship.name),
+            ...(alwaysServed.length > 0 ? { required: alwaysServed } : {}),
         };
-        required.push("relationships");
+
+        if (alwaysServed.length > 0) {
+            required.push("relationships");
+        }
     }
 
     if (options.links) {
