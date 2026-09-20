@@ -490,7 +490,7 @@ describe("response", () => {
                             properties: {
                                 errors: {
                                     type: "array",
-                                    minLength: 1,
+                                    minItems: 1,
                                     items: {
                                         type: "object",
                                         required: ["status"],
@@ -518,6 +518,18 @@ describe("response", () => {
                     },
                 },
             });
+        });
+
+        // partialDeepStrictEqual above would accept a stray `minLength`, which
+        // is what the array carried: it constrains strings, so an empty errors
+        // array satisfied the schema.
+        it("bounds the errors array with minItems rather than minLength", () => {
+            const result = buildErrorResponseObject({ description: "Error occurred" });
+            const schema = result.content?.["application/vnd.api+json"]?.schema as SchemaObject;
+            const errors = (schema.properties as Record<string, SchemaObject>).errors;
+
+            assert.equal(errors.minItems, 1);
+            assert.equal(errors.minLength, undefined);
         });
     });
 });
