@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.4...client-v1.3.0) (2026-09-20)
+
+
+### Features
+
+* **client:** let a relationship be declared optional ([56270b2](https://github.com/DASPRiD/jsonapi-serde-js/commit/56270b2a4b17469f5f14daa54744ed454f8ee664))
+
 ## [1.2.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/client-v1.2.3...client-v1.2.4) (2026-08-19)
 
 
