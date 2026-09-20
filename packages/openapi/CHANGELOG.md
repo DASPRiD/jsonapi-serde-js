@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.6.4...openapi-v1.7.0) (2026-09-20)
+
+
+### Features
+
+* **openapi:** let a relationship be declared optional ([ba94f3b](https://github.com/DASPRiD/jsonapi-serde-js/commit/ba94f3b935dda53372b248cf9c759ca5300ffc49))
+
 ## [1.6.4](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.6.3...openapi-v1.6.4) (2026-09-20)
 
 
