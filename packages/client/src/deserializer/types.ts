@@ -82,6 +82,7 @@ export type Relationship<TCardinality extends Cardinality, TIncluded extends Any
     type: string;
     cardinality: TCardinality;
     included?: TIncluded;
+    optional?: true;
 };
 
 /**
@@ -138,7 +139,13 @@ type ResourceAttributesOutput<T> = T extends $ZodType ? z.output<T> : EmptyObjec
  */
 type ResourceRelationshipsOutput<T> = T extends Relationships
     ? {
-          [K in keyof T]: DeserializedRelationship<T[K]>;
+          [K in keyof T as T[K]["optional"] extends true ? never : K]: DeserializedRelationship<
+              T[K]
+          >;
+      } & {
+          [K in keyof T as T[K]["optional"] extends true ? K : never]?: DeserializedRelationship<
+              T[K]
+          >;
       }
     : EmptyObject;
 

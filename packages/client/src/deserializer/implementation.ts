@@ -119,7 +119,7 @@ const createResourceSchema = (type: string, options: CreateResourceSchemaOptions
         type: z.literal(type),
         ...(options.attributesSchema ? { attributes: options.attributesSchema } : {}),
         ...(options.relationships
-            ? { relationships: createRelationshipsSchema(options.relationships) }
+            ? { relationships: createRelationshipsMemberSchema(options.relationships) }
             : {}),
         ...(options.linksSchema ? { links: options.linksSchema } : {}),
         ...(options.metaSchema ? { meta: options.metaSchema } : {}),
@@ -135,11 +135,21 @@ const createRelationshipsSchema = (relationships: Relationships) =>
         Object.fromEntries(
             Object.entries(relationships).map(([key, relationship]) => [
                 key,
-                createRelationshipSchema(relationship),
+                relationship.optional
+                    ? z.optional(createRelationshipSchema(relationship))
+                    : createRelationshipSchema(relationship),
             ]),
         ),
     );
 type ParsedRelationships = z.output<ReturnType<typeof createRelationshipsSchema>>;
+
+const createRelationshipsMemberSchema = (relationships: Relationships) => {
+    const schema = createRelationshipsSchema(relationships);
+
+    return Object.values(relationships).every((relationship) => relationship.optional)
+        ? z.optional(schema)
+        : schema;
+};
 
 type Identifier = {
     id: string;
@@ -270,16 +280,18 @@ const flattenRelationships = (
     parentPath: string[],
 ) =>
     Object.fromEntries(
-        Object.entries(relationships).map(([key, relationship]) => [
-            key,
-            flattenRelationship(
+        Object.entries(relationships)
+            .filter(([, relationship]) => relationship !== undefined)
+            .map(([key, relationship]) => [
                 key,
-                relationship as ParsedRelationship,
-                includedMap,
-                resourceSchemaCache,
-                parentPath,
-            ),
-        ]),
+                flattenRelationship(
+                    key,
+                    relationship as ParsedRelationship,
+                    includedMap,
+                    resourceSchemaCache,
+                    parentPath,
+                ),
+            ]),
     );
 
 /**

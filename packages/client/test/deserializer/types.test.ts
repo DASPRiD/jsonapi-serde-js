@@ -113,3 +113,25 @@ expectTypeOf<SimpleDeserializedDocument>().branded.toEqualTypeOf<{
     };
     links?: TopLevelLinks;
 }>();
+
+type ResourceWithOptionalRelationship = DeserializedResource<
+    undefined,
+    {
+        b: {
+            cardinality: "one";
+            type: "foo";
+            optional: true;
+        };
+        c: {
+            cardinality: "many";
+            type: "bar";
+        };
+    },
+    undefined,
+    undefined
+>;
+expectTypeOf<ResourceWithOptionalRelationship>().branded.toEqualTypeOf<{
+    id: string;
+    b?: ResourceIdentifier;
+    c: ResourceIdentifier[];
+}>();

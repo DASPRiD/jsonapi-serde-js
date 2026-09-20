@@ -43,6 +43,86 @@ describe("deserializer/implementation", () => {
             assert.equal(document.data.age, 30);
         });
 
+        it("accepts an optional relationship that is absent", () => {
+            const deserialize = createDeserializer({
+                type: "user",
+                cardinality: "one",
+                relationships: {
+                    pet: { type: "pet", cardinality: "one", optional: true },
+                },
+            });
+
+            const document = deserialize({
+                data: { id: "u1", type: "user", relationships: {} },
+            });
+
+            assert.equal(document.data.id, "u1");
+            assert.ok(!("pet" in document.data));
+        });
+
+        it("accepts an optional relationship that is present", () => {
+            const deserialize = createDeserializer({
+                type: "user",
+                cardinality: "one",
+                relationships: {
+                    pet: { type: "pet", cardinality: "one", optional: true },
+                },
+            });
+
+            const document = deserialize({
+                data: {
+                    id: "u1",
+                    type: "user",
+                    relationships: { pet: { data: { type: "pet", id: "p1" } } },
+                },
+            });
+
+            assert.equal(document.data.pet?.id, "p1");
+        });
+
+        it("accepts a resource with no relationships member when all are optional", () => {
+            const deserialize = createDeserializer({
+                type: "user",
+                cardinality: "one",
+                relationships: {
+                    pet: { type: "pet", cardinality: "one", optional: true },
+                    toys: { type: "toy", cardinality: "many", optional: true },
+                },
+            });
+
+            const document = deserialize({ data: { id: "u1", type: "user" } });
+
+            assert.equal(document.data.id, "u1");
+        });
+
+        it("treats an optional relationship set to undefined as absent", () => {
+            const deserialize = createDeserializer({
+                type: "user",
+                cardinality: "one",
+                relationships: {
+                    pet: { type: "pet", cardinality: "one", optional: true },
+                },
+            });
+
+            const document = deserialize({
+                data: { id: "u1", type: "user", relationships: { pet: undefined } },
+            });
+
+            assert.ok(!("pet" in document.data));
+        });
+
+        it("still rejects a required relationship that is absent", () => {
+            const deserialize = createDeserializer({
+                type: "user",
+                cardinality: "one",
+                relationships: {
+                    pet: { type: "pet", cardinality: "one" },
+                },
+            });
+
+            assert.throws(() => deserialize({ data: { id: "u1", type: "user" } }));
+        });
+
         it("supports one_nullable resource", () => {
             const deserialize = createDeserializer({
                 type: "user",
