@@ -120,7 +120,7 @@ When calling the serializer, context can be provided via the `SerializeOptions.c
 ```ts
 const doc = serialize("article", article, {
     context: {
-        articles: { locale: "en" },
+        article: { locale: "en" },
     },
 });
 ```
