@@ -21,11 +21,45 @@ option. This instructs the deserializer to:
 If the `included` option is not provided, the relationship data will only include resource identifiers (`id`) without
 expanded fields.
 
+## Optional Relationships
+
+A declared relationship is required by default, so a resource that omits it fails the parse rather than reading as
+absent. Mark a relationship `optional` when the server serves it only on request, such as one outside the default
+sparse fieldset:
+
+```ts
+const deserialize = createDeserializer({
+  type: "location",
+  cardinality: "many",
+  attributesSchema: z.object({ name: z.string() }),
+  relationships: {
+    availabilities: {
+      type: "availability",
+      cardinality: "many",
+      optional: true,
+    },
+  },
+});
+```
+
+The key becomes optional in the deserialized type as well, so consumers narrow before reading it:
+
+```ts
+const document = deserialize(input);
+console.log(document.data[0].availabilities?.length);
+```
+
+If every declared relationship is optional, the `relationships` member itself may be absent from the resource.
+
+`optional` accepts `true` and nothing else. The deserialized type is fixed when the deserializer is declared, so a flag
+that varies at runtime could only disagree with it. Leave the field out for a required relationship.
+
 ## Error Handling
 
 - If a relationship is configured with `included` but the related resource is missing from included, deserialization
   throws an error indicating a missing resource.
-- If the included resource fails schema validation, a ZodError is thrown.
+- If the included resource fails schema validation, a `$ZodError` is thrown.
+- If a relationship is absent and not marked `optional`, a `$ZodError` is thrown.
 
 ## Example: One Relationship with Included Expansion
 
@@ -86,4 +120,5 @@ The deserializer supports deep nesting by allowing included relationships to the
 - Relationship expansion depends on presence of the included option.
 - Missing or invalid included resources cause errors.
 - Relationships without included are deserialized as resource identifiers only.
+- Relationships are required unless marked `optional`.
 - Deeply nested included relationships are supported recursively.
