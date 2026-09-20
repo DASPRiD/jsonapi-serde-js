@@ -38,6 +38,22 @@ const serialize = SerializeBuilder.new()
     .add("post", postSerializer)
     .build();
 
+// A required property, because an all-optional context survives the contravariant check that the
+// serializer's declared context otherwise fails, so it would pass whether or not the type reaches
+// the map intact.
+type GreetingContext = {
+    salutation: string;
+};
+
+const greetingSerializer: EntitySerializer<typeof user, GreetingContext> = {
+    getId: (user) => user.id,
+    serialize: (user, context) => ({
+        attributes: { greeting: `${context?.salutation ?? "Hello"}, ${user.name}` },
+    }),
+};
+
+const serializeGreeting = SerializeBuilder.new().add("user", greetingSerializer).build();
+
 describe("request/serializer", () => {
     describe("SerializeBuilder", () => {
         it("serializes a single entity", () => {
@@ -159,4 +175,38 @@ describe("request/serializer", () => {
             });
         });
     });
+
+    describe("serializer context", () => {
+        it("hands a serializer the context stored under its own type", () => {
+            const result = serializeGreeting("user", user, {
+                context: { user: { salutation: "Hi" } },
+            });
+
+            assert.deepEqual(result.getBody(), {
+                jsonapi: {
+                    version: "1.1",
+                    ext: undefined,
+                    profile: undefined,
+                },
+                data: {
+                    type: "user",
+                    id: "1",
+                    attributes: { greeting: "Hi, Alice" },
+                    relationships: undefined,
+                    links: undefined,
+                    meta: undefined,
+                },
+                links: undefined,
+                meta: undefined,
+                included: undefined,
+            });
+        });
+    });
 });
+
+const _typeTests = () => {
+    serializeGreeting("user", user, {
+        // @ts-expect-error Context does not match the serializer's own
+        context: { user: { salutation: 123 } },
+    });
+};

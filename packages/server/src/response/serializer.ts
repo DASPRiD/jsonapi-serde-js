@@ -56,7 +56,11 @@ export type EntitySerializer<
     TMap extends SerializeMap = SerializeMap,
 > = {
     getId: (entity: T) => string;
-    serialize: (entity: T, context?: TContext) => SerializedEntity<TMap>;
+    // A method rather than a function-typed property, because method parameters are checked bivariantly. That is what
+    // makes `EntitySerializer<E, Narrow>` assignable to `AnyEntitySerializer`, so the map `SerializeBuilder.add` builds
+    // satisfies `SerializeMap` and `InferEntity` still matches it. As a property the context is contravariant, and
+    // `AnyEntitySerializer` has to widen to `any`, which stops `satisfies SerializeMap` from checking a context at all.
+    serialize(entity: T, context?: TContext): SerializedEntity<TMap>;
 };
 
 /**
@@ -205,8 +209,11 @@ export class SerializeBuilder<T extends SerializeMap> {
     public add<
         TType extends string,
         TEntity extends object,
-        TResult = SerializeBuilder<MergeMap<T, { [K in TType]: EntitySerializer<TEntity> }>>,
-    >(type: TType, serializer: EntitySerializer<TEntity>): TResult {
+        TContext extends EntitySerializerContext = EntitySerializerContext,
+        TResult = SerializeBuilder<
+            MergeMap<T, { [K in TType]: EntitySerializer<TEntity, TContext> }>
+        >,
+    >(type: TType, serializer: EntitySerializer<TEntity, TContext>): TResult {
         return new SerializeBuilder({
             ...this.serializers,
             [type]: serializer,
