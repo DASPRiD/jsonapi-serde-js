@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.4.6](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.5...integration-taxum-v1.4.6) (2026-09-20)
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.10.2
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.10.2
+
 ## [1.4.5](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.4...integration-taxum-v1.4.5) (2026-08-19)
 
 
