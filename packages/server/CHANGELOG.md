@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.10.1...server-v1.10.2) (2026-09-20)
+
+
+### Bug Fixes
+
+* **server:** keep the serializer context type through SerializeBuilder.add ([000e26a](https://github.com/DASPRiD/jsonapi-serde-js/commit/000e26a6168dee592d448a51727f8ab253110591))
+
 ## [1.10.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.10.0...server-v1.10.1) (2026-08-19)
 
 
