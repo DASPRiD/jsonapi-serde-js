@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.10.2...server-v1.10.3) (2026-09-21)
+
+
+### Bug Fixes
+
+* **openapi:** treat a defaulted query schema as optional ([8f006a3](https://github.com/DASPRiD/jsonapi-serde-js/commit/8f006a3cc801923676db5cc7665e758f91cb6a4b))
+
 ## [1.10.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/server-v1.10.1...server-v1.10.2) (2026-09-20)
 
 

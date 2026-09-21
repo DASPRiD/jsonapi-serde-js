@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.4.7](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.6...integration-taxum-v1.4.7) (2026-09-21)
+
+
+### Bug Fixes
+
+* **openapi:** treat a defaulted query schema as optional ([8f006a3](https://github.com/DASPRiD/jsonapi-serde-js/commit/8f006a3cc801923676db5cc7665e758f91cb6a4b))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * devDependencies
+    * @jsonapi-serde/server bumped to 1.10.3
+  * peerDependencies
+    * @jsonapi-serde/server bumped to 1.10.3
+
 ## [1.4.6](https://github.com/DASPRiD/jsonapi-serde-js/compare/integration-taxum-v1.4.5...integration-taxum-v1.4.6) (2026-09-20)
 
 
