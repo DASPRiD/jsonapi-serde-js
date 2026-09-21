@@ -102,7 +102,7 @@ const buildSchemaParameter = (
     in: "query",
     ...(style ? { style } : {}),
     schema: toJSONSchema(schema, { io: "input", target: "openapi-3.0" }) as SchemaObject,
-    required: schema._zod.optin === "optional" ? undefined : true,
+    required: schema._zod.optin === undefined ? true : undefined,
 });
 
 const expandDotNotation = (input: string): string[] => {

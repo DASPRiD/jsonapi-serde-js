@@ -150,6 +150,24 @@ describe("query", () => {
             assert.equal(result[0].required, true);
         });
 
+        it("includes optional `filter` parameter when zod type is defaulted", () => {
+            const result = buildQueryParameters({
+                filter: z.object({ title: z.string() }).default({ title: "" }),
+            });
+
+            assert.equal(result[0].name, "filter");
+            assert.equal(result[0].required, undefined);
+        });
+
+        it("includes optional `page` parameter when zod type is defaulted", () => {
+            const result = buildQueryParameters({
+                page: z.object({ number: z.number() }).default({ number: 1 }),
+            });
+
+            assert.equal(result[0].name, "page");
+            assert.equal(result[0].required, undefined);
+        });
+
         it("returns an empty array when no options are provided", () => {
             const result = buildQueryParameters({});
             assert.deepEqual(result, []);
@@ -170,6 +188,17 @@ describe("query", () => {
             assert.equal(result[1].name, "draft");
             assert.equal(result[1].in, "query");
             assert.equal(result[1].required, undefined);
+        });
+
+        it("includes optional custom parameters when their zod type is defaulted", () => {
+            const result = buildQueryParameters({
+                custom: {
+                    locale: z.string().default("en"),
+                },
+            });
+
+            assert.equal(result[0].name, "locale");
+            assert.equal(result[0].required, undefined);
         });
     });
 });
