@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.7.0...openapi-v1.7.1) (2026-09-21)
+
+
+### Bug Fixes
+
+* **openapi:** bound the errors array with minItems ([b0de40d](https://github.com/DASPRiD/jsonapi-serde-js/commit/b0de40db4633cdc4d93c4de3294b7b021b0f261b))
+
 ## [1.7.0](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.6.4...openapi-v1.7.0) (2026-09-20)
 
 
