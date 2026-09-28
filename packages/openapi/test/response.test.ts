@@ -25,7 +25,7 @@ describe("response", () => {
                     },
                     type: {
                         type: "string",
-                        enum: ["book"],
+                        const: "book",
                     },
                 },
                 required: ["id", "type"],
@@ -90,7 +90,7 @@ describe("response", () => {
                                         type: "object",
                                         properties: {
                                             id: { type: "string" },
-                                            type: { type: "string", enum: ["person"] },
+                                            type: { type: "string", const: "person" },
                                         },
                                         required: ["id", "type"],
                                     },
@@ -125,7 +125,7 @@ describe("response", () => {
                                                 type: "object",
                                                 properties: {
                                                     id: { type: "string" },
-                                                    type: { type: "string", enum: ["person"] },
+                                                    type: { type: "string", const: "person" },
                                                 },
                                                 required: ["id", "type"],
                                             },
@@ -163,7 +163,7 @@ describe("response", () => {
                                             type: "object",
                                             properties: {
                                                 id: { type: "string", example: "abc" },
-                                                type: { type: "string", enum: ["comment"] },
+                                                type: { type: "string", const: "comment" },
                                             },
                                             required: ["id", "type"],
                                         },
