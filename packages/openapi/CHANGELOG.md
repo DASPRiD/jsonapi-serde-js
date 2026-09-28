@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.3](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.7.2...openapi-v1.7.3) (2026-09-28)
+
+
+### Bug Fixes
+
+* **openapi:** emit OpenAPI 3.1 schemas instead of 3.0 ones ([#63](https://github.com/DASPRiD/jsonapi-serde-js/issues/63)) ([aee81c4](https://github.com/DASPRiD/jsonapi-serde-js/commit/aee81c4c0813a694832a5911483fdf5bcdf52560))
+
 ## [1.7.2](https://github.com/DASPRiD/jsonapi-serde-js/compare/openapi-v1.7.1...openapi-v1.7.2) (2026-09-21)
 
 
