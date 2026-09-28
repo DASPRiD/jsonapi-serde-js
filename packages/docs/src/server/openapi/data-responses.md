@@ -15,7 +15,7 @@ const articleSchema = {
     type: "object",
     properties: {
         id: { type: "string" },
-        type: { type: "string", enum: ["articles"] },
+        type: { type: "string", const: "articles" },
         attributes: {
             type: "object",
             properties: {
@@ -49,7 +49,7 @@ const response = buildDataResponseObject({
             type: "object",
             properties: {
                 id: { type: "string" },
-                type: { type: "string", enum: ["people"] },
+                type: { type: "string", const: "people" },
                 attributes: {
                     type: "object",
                     properties: {

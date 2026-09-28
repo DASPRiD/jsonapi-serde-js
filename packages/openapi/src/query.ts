@@ -1,7 +1,7 @@
 import type { ParseQueryOptions, SparseFieldSets } from "@jsonapi-serde/server/request";
-import type { ParameterObject, SchemaObject } from "openapi3-ts/oas31";
+import type { ParameterObject } from "openapi3-ts/oas31";
 import type { $ZodShape, $ZodType } from "zod/v4/core";
-import { toJSONSchema } from "zod/v4/core";
+import { toSchemaObject } from "./json-schema.js";
 
 /**
  * Generates OpenAPI 3.1 parameters based on query options
@@ -101,7 +101,7 @@ const buildSchemaParameter = (
     name,
     in: "query",
     ...(style ? { style } : {}),
-    schema: toJSONSchema(schema, { io: "input", target: "openapi-3.0" }) as SchemaObject,
+    schema: toSchemaObject(schema),
     required: schema._zod.optin === undefined ? true : undefined,
 });
 

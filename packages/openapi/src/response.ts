@@ -57,7 +57,7 @@ export const buildResourceSchemaObject = (
         },
         type: {
             type: "string",
-            enum: [options.type],
+            const: options.type,
         },
     };
 
@@ -81,7 +81,7 @@ export const buildResourceSchemaObject = (
                         type: "object",
                         properties: {
                             id: relationship.id ?? { type: "string", example: "abc" },
-                            type: { type: "string", enum: [relationship.type] },
+                            type: { type: "string", const: relationship.type },
                         },
                         required: ["id", "type"],
                     };

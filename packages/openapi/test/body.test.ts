@@ -22,7 +22,7 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                 },
                                 additionalProperties: false,
                             },
@@ -49,7 +49,7 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type", "id"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                     id: { type: "string", format: "uuid" },
                                 },
                             },
@@ -75,13 +75,38 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type", "attributes"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                     attributes: {
                                         type: "object",
                                         properties: {
                                             title: { type: "string" },
                                         },
                                         required: ["title"],
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+            });
+        });
+
+        it("describes a nullable attribute as a type union including null", () => {
+            const result = buildResourceRequestContentObject({
+                type: "book",
+                attributesSchema: z.object({ subtitle: z.string().nullable() }),
+            });
+
+            assert.partialDeepStrictEqual(result, {
+                "application/vnd.api+json": {
+                    schema: {
+                        properties: {
+                            data: {
+                                properties: {
+                                    attributes: {
+                                        properties: {
+                                            subtitle: { type: ["string", "null"] },
+                                        },
                                     },
                                 },
                             },
@@ -109,7 +134,7 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type", "relationships"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                     relationships: {
                                         type: "object",
                                         properties: {
@@ -156,7 +181,7 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type", "meta"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                     meta: {
                                         type: "object",
                                         properties: {
@@ -193,7 +218,7 @@ describe("body", () => {
                                 type: "object",
                                 required: ["type", "id", "attributes", "relationships", "meta"],
                                 properties: {
-                                    type: { type: "string", enum: ["book"] },
+                                    type: { type: "string", const: "book" },
                                     id: { type: "string" },
                                     attributes: {
                                         type: "object",
@@ -258,7 +283,7 @@ describe("body", () => {
                                             type: "object",
                                             properties: {
                                                 lid: { type: "string" },
-                                                type: { type: "string", enum: ["comment"] },
+                                                type: { type: "string", const: "comment" },
                                                 attributes: { type: "object" },
                                             },
                                         },
@@ -266,7 +291,7 @@ describe("body", () => {
                                             type: "object",
                                             properties: {
                                                 lid: { type: "string" },
-                                                type: { type: "string", enum: ["author"] },
+                                                type: { type: "string", const: "author" },
                                                 relationships: { type: "object" },
                                             },
                                         },
@@ -274,7 +299,7 @@ describe("body", () => {
                                             type: "object",
                                             properties: {
                                                 lid: { type: "string" },
-                                                type: { type: "string", enum: ["empty"] },
+                                                type: { type: "string", const: "empty" },
                                             },
                                         },
                                     ],

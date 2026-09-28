@@ -2,7 +2,7 @@ import type { AnyParseResourceRequestOptions } from "@jsonapi-serde/server/reque
 import type { ContentObject, SchemaObject } from "openapi3-ts/oas31";
 import { z } from "zod/v4";
 import type { $ZodType } from "zod/v4/core";
-import { toJSONSchema } from "zod/v4/core";
+import { toSchemaObject } from "./json-schema.js";
 
 /**
  * Generates an OpenAPI 3.1 content object for resource requests based on parser options
@@ -30,10 +30,7 @@ export const buildResourceRequestContentObject = (
         resourceShape.meta = options.metaSchema;
     }
 
-    const resourceSchema = toJSONSchema(z.strictObject(resourceShape), {
-        io: "input",
-        target: "openapi-3.0",
-    }) as SchemaObject;
+    const resourceSchema = toSchemaObject(z.strictObject(resourceShape));
 
     const rootProperties: Record<string, SchemaObject> = {
         data: resourceSchema,
@@ -57,10 +54,7 @@ export const buildResourceRequestContentObject = (
                         shape.relationships = options.relationshipsSchema;
                     }
 
-                    return toJSONSchema(z.strictObject(shape), {
-                        io: "input",
-                        target: "openapi-3.0",
-                    }) as SchemaObject;
+                    return toSchemaObject(z.strictObject(shape));
                 }),
             },
         };
@@ -95,10 +89,7 @@ export const buildRelationshipsRequestContentObject = (
                     properties: {
                         type: { const: type },
                         id: idSchema
-                            ? (toJSONSchema(idSchema, {
-                                  io: "input",
-                                  target: "openapi-3.0",
-                              }) as SchemaObject)
+                            ? toSchemaObject(idSchema)
                             : { type: "string", example: "abc" },
                     },
                     required: ["id", "type"],

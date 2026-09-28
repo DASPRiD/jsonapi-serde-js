@@ -132,6 +132,21 @@ describe("query", () => {
             assert.equal(result[0].required, true);
         });
 
+        it("describes a nullable `filter` field as a type union including null", () => {
+            const result = buildQueryParameters({
+                filter: z.object({ publishedBefore: z.string().nullable() }),
+            });
+
+            assert.partialDeepStrictEqual(result[0], {
+                name: "filter",
+                schema: {
+                    properties: {
+                        publishedBefore: { type: ["string", "null"] },
+                    },
+                },
+            });
+        });
+
         it("includes optional `page` parameter when zod type is optional", () => {
             const result = buildQueryParameters({
                 page: z.object({ number: z.number() }).optional(),
